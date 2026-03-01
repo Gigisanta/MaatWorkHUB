@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ReactNode } from "react";
+import { Toaster } from "@maatwork/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -15,11 +16,10 @@ export default function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="antialiased font-sans bg-gray-50 flex min-h-screen">
-        <main className="flex-1">
-          {children}
-        </main>
+    <html lang="en" className="dark">
+      <body className="antialiased font-sans bg-background text-foreground min-h-screen">
+        {children}
+        <Toaster />
       </body>
     </html>
   );
