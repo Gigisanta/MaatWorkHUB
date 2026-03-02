@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 import { headers } from "next/headers";
 
 interface AuditLogOptions {
-  tenantId?: string;
+  appId?: string;
   userId?: string;
   action: string;
   entityType: string;
@@ -13,7 +13,7 @@ interface AuditLogOptions {
 }
 
 export async function logAuditEvent({
-  tenantId,
+  appId,
   userId,
   action,
   entityType,
@@ -27,7 +27,7 @@ export async function logAuditEvent({
 
     await db.insert(audit_logs).values({
       id: uuid(),
-      tenantId,
+      appId,
       userId,
       action,
       entityType,

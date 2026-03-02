@@ -30,11 +30,11 @@ export const founderActionClient = actionClient.use(async ({ next }) => {
   return next({ ctx: { session } });
 });
 
-export const tenantActionClient = actionClient.use(async ({ next }) => {
+export const appActionClient = actionClient.use(async ({ next }) => {
   const session = await auth();
 
-  if (!session?.user || !session.user.tenantId) {
-    throw new Error("Unauthorized tenant access");
+  if (!session?.user || !session.user.appId) {
+    throw new Error("Unauthorized app access");
   }
 
   return next({ ctx: { session } });

@@ -15,6 +15,13 @@
       "when": 1772407357429,
       "tag": "0001_red_bug",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1772467071962,
+      "tag": "0002_hot_dexter_bennett",
+      "breakpoints": true
     }
   ]
 }

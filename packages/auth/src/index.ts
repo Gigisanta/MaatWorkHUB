@@ -9,12 +9,12 @@ declare module "next-auth" {
       email: string;
       name?: string | null;
       role: string;
-      tenantId: string;
+      appId: string;
     }
   }
   interface User {
     role?: string;
-    tenantId?: string;
+    appId?: string;
   }
 }
 
@@ -34,7 +34,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             email: credentials.email as string, 
             name: credentials.email === "gio@maat.work" ? "Gio" : "Tomi", 
             role: "founder", 
-            tenantId: "maatwork-hq" 
+            appId: "maatwork-hq" 
           };
         }
         
@@ -44,7 +44,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           email: credentials?.email as string,
           name: "Demo User",
           role: "admin",
-          tenantId: "demo-natatorio"
+          appId: "demo-natatorio"
         };
       }
     }),
@@ -53,14 +53,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     jwt({ token, user }) {
       if (user) {
         token.role = user.role;
-        token.tenantId = user.tenantId;
+        token.appId = user.appId;
       }
       return token;
     },
     session({ session, token }) {
       if (session.user) {
         session.user.role = token.role as string;
-        session.user.tenantId = token.tenantId as string;
+        session.user.appId = token.appId as string;
       }
       return session;
     }

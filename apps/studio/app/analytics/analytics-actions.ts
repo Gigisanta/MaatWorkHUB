@@ -1,5 +1,5 @@
 import { db } from "@maatwork/database";
-import { analytics_events, tenants } from "@maatwork/database/schema";
+import { analytics_events, apps } from "@maatwork/database/schema";
 import { desc, eq, and, sql, gte } from "drizzle-orm";
 
 /**
@@ -47,17 +47,17 @@ export async function getFounderIntelligence() {
 }
 
 /**
- * Get tenant-specific engagement heatmap data
+ * Get app-specific engagement heatmap data
  */
 export async function getEngagementHeatmap() {
   const heatmap = await db
     .select({
-      tenantName: tenants.name,
+      appName: apps.name,
       eventCount: sql<number>`count(${analytics_events.id})`
     })
-    .from(tenants)
-    .leftJoin(analytics_events, eq(tenants.id, analytics_events.tenantId))
-    .groupBy(tenants.name)
+    .from(apps)
+    .leftJoin(analytics_events, eq(apps.id, analytics_events.appId))
+    .groupBy(apps.name)
     .orderBy(desc(sql`count(${analytics_events.id})`));
 
   return heatmap;

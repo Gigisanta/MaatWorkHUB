@@ -1,5 +1,5 @@
 import { db } from "@maatwork/database";
-import { tenants, users, tenant_invoices } from "@maatwork/database/schema";
+import { apps, users, app_invoices } from "@maatwork/database/schema";
 import { count, sql } from "drizzle-orm";
 import { 
   Card, 
@@ -31,15 +31,15 @@ async function StudioKPIs() {
   ] = await Promise.all([
     // Group related counts in a single query if possible, or parallelize
     Promise.all([
-      db.select({ count: count() }).from(tenants),
+      db.select({ count: count() }).from(apps),
       db.select({ count: count() }).from(users),
-      db.select({ count: count() }).from(tenants).where(sql`${tenants.githubRepo} IS NOT NULL`),
-      db.select({ count: count() }).from(tenants).where(sql`${tenants.vercelUrl} IS NOT NULL`),
+      db.select({ count: count() }).from(apps).where(sql`${apps.githubRepo} IS NOT NULL`),
+      db.select({ count: count() }).from(apps).where(sql`${apps.vercelUrl} IS NOT NULL`),
     ]),
-    db.select({ amount: tenant_invoices.amount, status: tenant_invoices.status }).from(tenant_invoices),
+    db.select({ amount: app_invoices.amount, status: app_invoices.status }).from(app_invoices),
   ]);
 
-  const [tenantsCount, usersCount, githubCount, vercelCount] = counts.map(r => r[0]);
+  const [appsCount, usersCount, githubCount, vercelCount] = counts.map(r => r[0]);
 
   const mrr = invoicesList
     .filter(inv => inv.status === 'paid')
@@ -67,7 +67,7 @@ async function StudioKPIs() {
           <Building2 className="h-4 w-4 text-blue-400" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold text-white/90">{tenantsCount?.count || 0}</div>
+          <div className="text-2xl font-bold text-white/90">{appsCount?.count || 0}</div>
           <p className="text-[10px] text-blue-400/60 uppercase tracking-widest mt-1">+2 este mes</p>
         </CardContent>
       </Card>
@@ -122,7 +122,7 @@ export default async function StudioHomePage() {
     title: log.action.replace(/_/g, ' '),
     description: JSON.stringify(log.details),
     timestamp: log.createdAt?.toLocaleString() || "Reciente",
-    icon: log.action.includes('TENANT') ? <Building2 /> : 
+    icon: log.action.includes('APP') ? <Building2 /> : 
           log.action.includes('SECURITY') ? <CheckCircle2 /> :
           log.action.includes('PAYMENT') ? <AlertCircle /> : <UserPlus />,
     variant: log.action.includes('FAILED') ? 'destructive' : 

@@ -1,5 +1,5 @@
 import { db } from "@maatwork/database";
-import { tenants } from "@maatwork/database/schema";
+import { apps } from "@maatwork/database/schema";
 import HubLayoutClient from "./layout-client";
 import { ReactNode } from "react";
 
@@ -10,15 +10,15 @@ export default async function RootLayout({
 }: {
   children: ReactNode;
 }) {
-  let allTenants = [];
+  let allApps: any[] = [];
   try {
-    allTenants = await db.select().from(tenants);
+    allApps = await db.select().from(apps);
   } catch (error) {
-    console.warn("Could not fetch tenants, database might not be initialized:", error);
+    console.warn("Could not fetch apps, database might not be initialized:", error);
   }
 
   return (
-    <HubLayoutClient allTenants={allTenants}>
+    <HubLayoutClient allApps={allApps}>
       <div className="relative min-h-screen">
         {/* Background gradient for premium feel */}
         <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-zinc-900 via-zinc-950 to-black -z-10" />

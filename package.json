@@ -7,21 +7,22 @@
     "pre-dev": "tsx scripts/pre-dev.ts",
     "dev": "pnpm pre-dev && turbo run dev",
     "dev:studio": "pnpm pre-dev && turbo run dev --filter=studio",
-    "dev:tenant": "pnpm pre-dev && turbo run dev --filter=tenant",
+    "dev:app": "pnpm pre-dev && turbo run dev --filter=app",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "db:push": "pnpm --filter @maatwork/database db:push",
     "db:studio": "pnpm --filter @maatwork/database db:studio",
-     "seed": "pnpm --filter @maatwork/database seed",
+    "seed": "pnpm --filter @maatwork/database seed",
     "clean": "tsx scripts/clean.ts",
-    "create-tenant": "tsx scripts/create-tenant.ts"
+    "create-app": "tsx scripts/create-app.ts"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "prettier": "^3.4.2",
+    "tsx": "^4.7.2",
     "turbo": "^2.4.2",
-    "typescript": "^5.7.3",
-    "tsx": "^4.7.2"
+    "typescript": "^5.7.3"
   },
   "packageManager": "pnpm@9.15.4",
   "engines": {

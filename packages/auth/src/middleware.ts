@@ -10,19 +10,19 @@ export async function requireFounder(req: NextRequest) {
   return NextResponse.next();
 }
 
-export async function requireTenantAccess(req: NextRequest, tenantSlug: string) {
+export async function requireAppAccess(req: NextRequest, appSlug: string) {
   const session = await auth();
   if (!session?.user) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
   
   if (session.user.role === 'founder') {
-    return NextResponse.next(); // Founders can access any tenant
+    return NextResponse.next(); // Founders can access any app
   }
   
-  // Future lookup logic to match tenantSlug to tenantId
-  // For now, allow if tenantId exists on user
-  if (!session.user.tenantId) {
+  // Future lookup logic to match appSlug to appId
+  // For now, allow if appId exists on user
+  if (!session.user.appId) {
     return NextResponse.redirect(new URL('/unauthorized', req.url));
   }
   

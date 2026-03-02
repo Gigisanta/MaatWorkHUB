@@ -14,8 +14,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "tenant_id": {
-          "name": "tenant_id",
+        "app_id": {
+          "name": "app_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -48,12 +48,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "activity_logs_tenant_id_tenants_id_fk": {
-          "name": "activity_logs_tenant_id_tenants_id_fk",
+        "activity_logs_app_id_apps_id_fk": {
+          "name": "activity_logs_app_id_apps_id_fk",
           "tableFrom": "activity_logs",
-          "tableTo": "tenants",
+          "tableTo": "apps",
           "columnsFrom": [
-            "tenant_id"
+            "app_id"
           ],
           "columnsTo": [
             "id"
@@ -88,8 +88,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "tenant_id": {
-          "name": "tenant_id",
+        "app_id": {
+          "name": "app_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -110,12 +110,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "attendances_tenant_id_tenants_id_fk": {
-          "name": "attendances_tenant_id_tenants_id_fk",
+        "attendances_app_id_apps_id_fk": {
+          "name": "attendances_app_id_apps_id_fk",
           "tableFrom": "attendances",
-          "tableTo": "tenants",
+          "tableTo": "apps",
           "columnsFrom": [
-            "tenant_id"
+            "app_id"
           ],
           "columnsTo": [
             "id"
@@ -150,8 +150,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "tenant_id": {
-          "name": "tenant_id",
+        "app_id": {
+          "name": "app_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -184,12 +184,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "clients_tenant_id_tenants_id_fk": {
-          "name": "clients_tenant_id_tenants_id_fk",
+        "clients_app_id_apps_id_fk": {
+          "name": "clients_app_id_apps_id_fk",
           "tableFrom": "clients",
-          "tableTo": "tenants",
+          "tableTo": "apps",
           "columnsFrom": [
-            "tenant_id"
+            "app_id"
           ],
           "columnsTo": [
             "id"
@@ -211,8 +211,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "tenant_id": {
-          "name": "tenant_id",
+        "app_id": {
+          "name": "app_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -239,12 +239,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "groups_tenant_id_tenants_id_fk": {
-          "name": "groups_tenant_id_tenants_id_fk",
+        "groups_app_id_apps_id_fk": {
+          "name": "groups_app_id_apps_id_fk",
           "tableFrom": "groups",
-          "tableTo": "tenants",
+          "tableTo": "apps",
           "columnsFrom": [
-            "tenant_id"
+            "app_id"
           ],
           "columnsTo": [
             "id"
@@ -266,8 +266,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "tenant_id": {
-          "name": "tenant_id",
+        "app_id": {
+          "name": "app_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -301,12 +301,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "invoices_tenant_id_tenants_id_fk": {
-          "name": "invoices_tenant_id_tenants_id_fk",
+        "invoices_app_id_apps_id_fk": {
+          "name": "invoices_app_id_apps_id_fk",
           "tableFrom": "invoices",
-          "tableTo": "tenants",
+          "tableTo": "apps",
           "columnsFrom": [
-            "tenant_id"
+            "app_id"
           ],
           "columnsTo": [
             "id"
@@ -341,8 +341,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "tenant_id": {
-          "name": "tenant_id",
+        "app_id": {
+          "name": "app_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -382,12 +382,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "notifications_tenant_id_tenants_id_fk": {
-          "name": "notifications_tenant_id_tenants_id_fk",
+        "notifications_app_id_apps_id_fk": {
+          "name": "notifications_app_id_apps_id_fk",
           "tableFrom": "notifications",
-          "tableTo": "tenants",
+          "tableTo": "apps",
           "columnsFrom": [
-            "tenant_id"
+            "app_id"
           ],
           "columnsTo": [
             "id"
@@ -422,8 +422,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "tenant_id": {
-          "name": "tenant_id",
+        "app_id": {
+          "name": "app_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -449,12 +449,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "pricing_plans_tenant_id_tenants_id_fk": {
-          "name": "pricing_plans_tenant_id_tenants_id_fk",
+        "pricing_plans_app_id_apps_id_fk": {
+          "name": "pricing_plans_app_id_apps_id_fk",
           "tableFrom": "pricing_plans",
-          "tableTo": "tenants",
+          "tableTo": "apps",
           "columnsFrom": [
-            "tenant_id"
+            "app_id"
           ],
           "columnsTo": [
             "id"
@@ -476,8 +476,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "tenant_id": {
-          "name": "tenant_id",
+        "app_id": {
+          "name": "app_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -497,12 +497,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "settings_tenant_id_tenants_id_fk": {
-          "name": "settings_tenant_id_tenants_id_fk",
+        "settings_app_id_apps_id_fk": {
+          "name": "settings_app_id_apps_id_fk",
           "tableFrom": "settings",
-          "tableTo": "tenants",
+          "tableTo": "apps",
           "columnsFrom": [
-            "tenant_id"
+            "app_id"
           ],
           "columnsTo": [
             "id"
@@ -524,8 +524,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "tenant_id": {
-          "name": "tenant_id",
+        "app_id": {
+          "name": "app_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -565,12 +565,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "subscriptions_tenant_id_tenants_id_fk": {
-          "name": "subscriptions_tenant_id_tenants_id_fk",
+        "subscriptions_app_id_apps_id_fk": {
+          "name": "subscriptions_app_id_apps_id_fk",
           "tableFrom": "subscriptions",
-          "tableTo": "tenants",
+          "tableTo": "apps",
           "columnsFrom": [
-            "tenant_id"
+            "app_id"
           ],
           "columnsTo": [
             "id"
@@ -608,8 +608,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "tenants": {
-      "name": "tenants",
+    "apps": {
+      "name": "apps",
       "schema": "",
       "columns": {
         "id": {
@@ -661,15 +661,15 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "tenants_slug_unique": {
-          "name": "tenants_slug_unique",
+        "apps_slug_unique": {
+          "name": "apps_slug_unique",
           "nullsNotDistinct": false,
           "columns": [
             "slug"
           ]
         },
-        "tenants_domain_unique": {
-          "name": "tenants_domain_unique",
+        "apps_domain_unique": {
+          "name": "apps_domain_unique",
           "nullsNotDistinct": false,
           "columns": [
             "domain"
@@ -687,8 +687,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "tenant_id": {
-          "name": "tenant_id",
+        "app_id": {
+          "name": "app_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -715,12 +715,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "time_entries_tenant_id_tenants_id_fk": {
-          "name": "time_entries_tenant_id_tenants_id_fk",
+        "time_entries_app_id_apps_id_fk": {
+          "name": "time_entries_app_id_apps_id_fk",
           "tableFrom": "time_entries",
-          "tableTo": "tenants",
+          "tableTo": "apps",
           "columnsFrom": [
-            "tenant_id"
+            "app_id"
           ],
           "columnsTo": [
             "id"
@@ -755,8 +755,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "tenant_id": {
-          "name": "tenant_id",
+        "app_id": {
+          "name": "app_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -790,12 +790,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "users_tenant_id_tenants_id_fk": {
-          "name": "users_tenant_id_tenants_id_fk",
+        "users_app_id_apps_id_fk": {
+          "name": "users_app_id_apps_id_fk",
           "tableFrom": "users",
-          "tableTo": "tenants",
+          "tableTo": "apps",
           "columnsFrom": [
-            "tenant_id"
+            "app_id"
           ],
           "columnsTo": [
             "id"
@@ -825,8 +825,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "tenant_id": {
-          "name": "tenant_id",
+        "app_id": {
+          "name": "app_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -860,12 +860,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "whatsapp_messages_tenant_id_tenants_id_fk": {
-          "name": "whatsapp_messages_tenant_id_tenants_id_fk",
+        "whatsapp_messages_app_id_apps_id_fk": {
+          "name": "whatsapp_messages_app_id_apps_id_fk",
           "tableFrom": "whatsapp_messages",
-          "tableTo": "tenants",
+          "tableTo": "apps",
           "columnsFrom": [
-            "tenant_id"
+            "app_id"
           ],
           "columnsTo": [
             "id"

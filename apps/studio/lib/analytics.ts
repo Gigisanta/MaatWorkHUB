@@ -3,9 +3,9 @@ import { analytics_events } from "@maatwork/database/schema";
 import { v4 as uuid } from "uuid";
 
 interface TrackOptions {
-  tenantId?: string;
+  appId?: string;
   eventType: string; // e.g., 'mrr.update', 'feature.used'
-  source: 'studio' | 'tenant-app' | 'system';
+  source: 'studio' | 'app-app' | 'system';
   value?: number;
   metadata?: Record<string, unknown>;
 }
@@ -15,7 +15,7 @@ interface TrackOptions {
  * High-performance event ingestion for founder intelligence.
  */
 export async function trackEvent({
-  tenantId,
+  appId,
   eventType,
   source,
   value,
@@ -25,7 +25,7 @@ export async function trackEvent({
     // In a production scaling scenario, this would go to a queue (e.g. SQS/Redis)
     await db.insert(analytics_events).values({
       id: uuid(),
-      tenantId,
+      appId,
       eventType,
       source,
       value: value?.toString(),
@@ -44,10 +44,10 @@ export async function trackEvent({
 export async function trackFinancialEvent(
   amount: number, 
   type: 'subscription' | 'one-time',
-  tenantId?: string
+  appId?: string
 ) {
   return trackEvent({
-    tenantId,
+    appId,
     eventType: 'mrr.update',
     source: 'system',
     value: amount,

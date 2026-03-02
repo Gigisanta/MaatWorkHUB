@@ -11,7 +11,7 @@ async function run() {
     await db.execute(sql`
       CREATE TABLE IF NOT EXISTS audit_logs (
         id text PRIMARY KEY,
-        tenant_id text REFERENCES tenants(id),
+        app_id text REFERENCES apps(id),
         user_id text REFERENCES users(id),
         action text NOT NULL,
         entity_type text NOT NULL,
@@ -23,14 +23,14 @@ async function run() {
       );
     `);
     
-    await db.execute(sql`CREATE INDEX IF NOT EXISTS audit_logs_tenant_idx ON audit_logs (tenant_id);`);
+    await db.execute(sql`CREATE INDEX IF NOT EXISTS audit_logs_app_idx ON audit_logs (app_id);`);
     await db.execute(sql`CREATE INDEX IF NOT EXISTS audit_logs_created_at_idx ON audit_logs (created_at DESC);`);
 
     // MaatAnalytics Core Table
     await db.execute(sql`
       CREATE TABLE IF NOT EXISTS analytics_events (
         id text PRIMARY KEY,
-        tenant_id text REFERENCES tenants(id),
+        app_id text REFERENCES apps(id),
         event_type text NOT NULL,
         source text NOT NULL,
         value decimal(15, 2),

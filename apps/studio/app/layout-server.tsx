@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const studioNav: NavItem[] = [
   { title: "Dashboard", href: "/", icon: LayoutDashboard },
   { title: "Pipeline", href: "/pipeline", icon: GitMerge },
-  { title: "Tenants", href: "/tenants", icon: Users },
+  { title: "Apps", href: "/apps", icon: Users },
   { title: "Billing", href: "/billing", icon: Receipt },
 ];
 

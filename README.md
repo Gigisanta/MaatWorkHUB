@@ -1,6 +1,6 @@
 # MaatWorkStudio SaaS Platform (v1.0.0)
 
-MaatWork is a specialized SaaS platform designed for high-performance management of natatories and member-based businesses. Built with a modern, scalable monorepo architecture, it provides a unified control panel for founders and focused dashboards for tenants.
+MaatWork is a specialized SaaS platform designed for high-performance management of natatories and member-based businesses. Built with a modern, scalable monorepo architecture, it provides a unified control panel for founders and focused dashboards for apps.
 
 ## 🚀 Technology Stack
 
@@ -17,8 +17,8 @@ MaatWork is a specialized SaaS platform designed for high-performance management
 
 The project follows a **C4 Component approach** within a Turborepo monorepo:
 
-- `apps/studio`: The founder's "Command Center" for global application health, tenant management, and system auditing.
-- `apps/tenant`: Client-facing dashboards tailored for individual businesses.
+- `apps/studio`: The founder's "Command Center" for global application health, app management, and system auditing.
+- `apps/app`: Client-facing dashboards tailored for individual businesses.
 - `packages/auth`: Centralized authentication logic and session management.
 - `packages/database`: Shared schema, migrations, and database client.
 - `packages/ui`: A shared design system built with Radix UI and Tailwind CSS.
@@ -65,7 +65,7 @@ pnpm dev
 
 MaatWork is built with security as a first-class citizen:
 
-- **Tenant Isolation:** Row-Level Security (RLS) ensures strict data separation between clients.
+- **App Isolation:** Row-Level Security (RLS) ensures strict data separation between clients.
 - **Audit Logging:** Every critical action is recorded in the Audit Vault for compliance.
 - **Modern Auth:** Secure session management via Auth.js with Google and Credentials support.
 

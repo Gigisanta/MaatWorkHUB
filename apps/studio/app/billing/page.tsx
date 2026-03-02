@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle, Table, TableBody, TableCell, 
 import { CreditCard, TrendingUp, AlertCircle, FileText } from "lucide-react";
 
 export default async function BillingPage() {
-  const { stats, recentInvoices, tenants } = await getGlobalBillingData();
+  const { stats, recentInvoices, apps } = await getGlobalBillingData();
 
   return (
     <div className="space-y-8">
@@ -68,7 +68,7 @@ export default async function BillingPage() {
               <TableBody>
                 {recentInvoices.map((inv) => (
                   <TableRow key={inv.id} className="border-white/5 hover:bg-white/[0.01]">
-                    <TableCell className="font-medium text-white/80">{inv.tenantName}</TableCell>
+                    <TableCell className="font-medium text-white/80">{inv.appName}</TableCell>
                     <TableCell className="text-white/90">${Number(inv.amount).toLocaleString()}</TableCell>
                     <TableCell>
                       <Badge variant={inv.status === 'paid' ? 'default' : 'destructive'} className="text-[10px] capitalize">
@@ -91,7 +91,7 @@ export default async function BillingPage() {
           </CardHeader>
           <CardContent className="pt-6">
             <div className="space-y-4">
-              {tenants.map(t => (
+              {apps.map(t => (
                 <div key={t.id} className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-primary/20 transition-all">
                   <div className="text-sm font-medium text-white/80">{t.name}</div>
                   <div className="font-mono text-sm text-primary">${Number(t.mrr).toLocaleString()}</div>

@@ -65,7 +65,7 @@ export default async function AnalyticsPage() {
           <div className="text-orange-500 mb-4 p-2 w-fit rounded-lg bg-orange-500/10 border border-orange-500/20">
             <Users className="h-5 w-5" />
           </div>
-          <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white/40">Active Tenants</h3>
+          <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white/40">Active Apps</h3>
           <p className="text-3xl font-bold mt-2">{heatmap.length}</p>
           <p className="mt-2 text-xs text-white/40">Suscripciones verificadas</p>
         </GlassCard>
@@ -101,14 +101,14 @@ export default async function AnalyticsPage() {
           <div className="p-6 border-b border-white/5">
             <h2 className="text-xl font-bold flex items-center gap-2">
               <Activity className="h-5 w-5 text-green-500" />
-              Tenant Engagement Heatmap
+              App Engagement Heatmap
             </h2>
           </div>
           <div className="p-6">
              <div className="grid grid-cols-2 gap-4">
                {heatmap.map((item) => (
-                 <div key={item.tenantName} className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-primary/20 transition-all group">
-                   <p className="text-[10px] font-black uppercase tracking-widest text-white/30 group-hover:text-primary/60">{item.tenantName}</p>
+                 <div key={item.appName} className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-primary/20 transition-all group">
+                   <p className="text-[10px] font-black uppercase tracking-widest text-white/30 group-hover:text-primary/60">{item.appName}</p>
                    <p className="text-2xl font-bold mt-1">{item.eventCount}</p>
                    <p className="text-[10px] text-white/20 mt-1 italic font-mono">interacciones registradas</p>
                  </div>

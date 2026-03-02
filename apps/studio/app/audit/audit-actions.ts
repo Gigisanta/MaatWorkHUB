@@ -1,9 +1,9 @@
 import { db } from "@maatwork/database";
-import { audit_logs, tenants, users } from "@maatwork/database/schema";
+import { audit_logs, apps, users } from "@maatwork/database/schema";
 import { desc, eq, and, sql } from "drizzle-orm";
 
 export async function getAuditLogs(options: { 
-  tenantId?: string;
+  appId?: string;
   entityType?: string;
   limit?: number;
 } = {}) {
@@ -15,12 +15,12 @@ export async function getAuditLogs(options: {
       entityId: audit_logs.entityId,
       metadata: audit_logs.metadata,
       createdAt: audit_logs.createdAt,
-      tenantName: tenants.name,
+      appName: apps.name,
       userName: users.name,
       ipAddress: audit_logs.ipAddress
     })
     .from(audit_logs)
-    .leftJoin(tenants, eq(audit_logs.tenantId, tenants.id))
+    .leftJoin(apps, eq(audit_logs.appId, apps.id))
     .leftJoin(users, eq(audit_logs.userId, users.id))
     .orderBy(desc(audit_logs.createdAt))
     .limit(options.limit || 50);

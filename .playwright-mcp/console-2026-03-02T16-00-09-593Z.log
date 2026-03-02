@@ -1,0 +1,600 @@
+[     305ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/page.tsx
+
+  #3 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[     374ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3001/login:0
+[     534ms] Error: ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/page.tsx
+
+  #3 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at Object.getCompilationErrors (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1008:59)
+    at DevBundlerService.getCompilationError (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/dev/next-dev-server.js:706:42)
+    at DevServer.findPageComponents (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/dev/next-dev-server.js:676:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/base-server.js:1733:26)
+[     547ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/page.tsx
+
+  #3 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[     548ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/pipeline/page.tsx
+
+  #3 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[     548ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/tenants/loading.tsx
+
+  #3 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/tenants/page.tsx
+
+  #4 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #5 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[     548ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/billing/page.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #3 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[     548ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/audit/page.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #3 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[     548ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/analytics/page.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #3 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[     548ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/[tenantSlug]/page.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #3 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[     548ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/tenants/new/page.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/tenants/new/page.tsx [Server Component]
+
+  #2 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/tenants/new/page.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/tenants/new/page.tsx [Server Component]
+
+  #3 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #4 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/tenants/loading.tsx
+
+  #5 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #6 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[     548ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  Server Component:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  Client Component Browser:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[     604ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3001/favicon.ico:0
+[     619ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/page.tsx
+
+  #3 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[   10827ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/page.tsx
+
+  #3 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[   13229ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/page.tsx
+
+  #3 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[   13341ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/page.tsx
+
+  #3 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[   25421ms] [ERROR] ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-checkbox'
+  2 |
+  3 | import * as React from "react"
+> 4 | import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Check } from "lucide-react"
+  6 |
+  7 | import { cn } from "../../lib/utils"
+
+Import traces:
+  #1 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/loading.tsx
+
+  #2 [Server Component]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx
+    ./Downloads/MaatWork/packages/ui/src/index.ts
+    ./Downloads/MaatWork/apps/studio/app/page.tsx
+
+  #3 [Client Component Browser]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component Browser]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component Browser]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./Downloads/MaatWork/packages/ui/src/components/ui/checkbox.tsx [Client Component SSR]
+    ./Downloads/MaatWork/packages/ui/src/index.ts [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Client Component SSR]
+    ./Downloads/MaatWork/apps/studio/app/layout-client.tsx [Server Component]
+    ./Downloads/MaatWork/apps/studio/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[   33807ms] [WARNING] The resource http://localhost:3001/_next/static/chunks/Downloads_MaatWork_apps_studio_app_globals_520f2214.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3001/login:0

@@ -18,7 +18,7 @@ import {
   BarChart3
 } from "lucide-react";
 
-interface Tenant {
+interface App {
   id: string;
   name: string;
   slug: string;
@@ -27,7 +27,7 @@ interface Tenant {
 const studioNav: NavItem[] = [
   { title: "Dashboard", href: "/", icon: LayoutDashboard },
   { title: "Pipeline", href: "/pipeline", icon: GitMerge },
-  { title: "Tenants", href: "/tenants", icon: Users },
+  { title: "Apps", href: "/apps", icon: Users },
   { title: "Facturación", href: "/billing", icon: Receipt },
   { title: "Auditoría", href: "/audit", icon: ShieldAlert },
   { title: "Analytics", href: "/analytics", icon: BarChart3 }, // Added Analytics item
@@ -35,10 +35,10 @@ const studioNav: NavItem[] = [
 
 export default function HubLayoutClient({
   children,
-  allTenants
+  allApps
 }: {
   children: ReactNode;
-  allTenants: Tenant[];
+  allApps: App[];
 }) {
   return (
     <html lang="en" className="dark">
@@ -54,7 +54,7 @@ export default function HubLayoutClient({
             </div>
             
             <div className="p-4 border-b border-white/5 bg-white/[0.02]">
-              <HubContextSwitcher tenants={allTenants} />
+              <HubContextSwitcher apps={allApps} />
             </div>
 
             <div className="flex-1 overflow-auto py-8">

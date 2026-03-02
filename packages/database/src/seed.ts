@@ -1,5 +1,5 @@
 import { db } from './index';
-import { tenants, users } from './schema';
+import { apps, users } from './schema';
 import * as dotenv from 'dotenv';
 import { resolve } from 'path';
 
@@ -8,8 +8,8 @@ dotenv.config({ path: resolve(__dirname, '../../../.env') });
 async function main() {
   console.log('Seeding initial data...');
   
-  // Create HQ Tenant
-  await db.insert(tenants).values({
+  // Create HQ App
+  await db.insert(apps).values({
     id: 'maatwork-hq',
     slug: 'studio',
     name: 'Maatwork Studio',
@@ -19,7 +19,7 @@ async function main() {
 
   await db.insert(users).values({
     id: 'founder-1',
-    tenantId: 'maatwork-hq',
+    appId: 'maatwork-hq',
     email: 'gio@maat.work',
     name: 'Gio',
     role: 'founder'
@@ -27,14 +27,14 @@ async function main() {
 
   await db.insert(users).values({
     id: 'founder-2',
-    tenantId: 'maatwork-hq',
+    appId: 'maatwork-hq',
     email: 'tomi@maat.work',
     name: 'Tomi',
     role: 'founder'
   }).onConflictDoNothing();
 
-  // Create Demo Tenants
-  await db.insert(tenants).values({
+  // Create Demo Apps
+  await db.insert(apps).values({
     id: 'demo-natatorio',
     slug: 'natatorio',
     name: 'Natatorio Demo',
@@ -42,19 +42,19 @@ async function main() {
     config: {}
   }).onConflictDoNothing();
 
-  // Create Mock Invoices for the demo tenant
-  const { tenant_invoices, leads, activity_logs } = await import('./schema');
-  await db.insert(tenant_invoices).values([
+  // Create Mock Invoices for the demo app
+  const { app_invoices, leads, activity_logs } = await import('./schema');
+  await db.insert(app_invoices).values([
     {
       id: 'inv_1',
-      tenantId: 'demo-natatorio',
+      appId: 'demo-natatorio',
       amount: '35000.00',
       currency: 'ARS',
       status: 'paid',
     },
     {
       id: 'inv_2',
-      tenantId: 'maatwork-hq',
+      appId: 'maatwork-hq',
       amount: '35000.00',
       currency: 'ARS',
       status: 'paid',
@@ -71,10 +71,10 @@ async function main() {
 
   // Insert Activity Logs
   await db.insert(activity_logs).values([
-    { id: "log_1", tenantId: "maatwork-hq", userId: "founder-1", action: "TENANT_CREATED", details: { tenantName: "Natatorio Splasher" }, createdAt: new Date(Date.now() - 15 * 60 * 1000) },
-    { id: "log_2", tenantId: "maatwork-hq", userId: "founder-1", action: "SECURITY_UPDATE", details: { patch: "v1.0.1", appliedTo: "all" }, createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000) },
-    { id: "log_3", tenantId: "demo-natatorio", userId: "founder-1", action: "PAYMENT_FAILED", details: { tenantName: "Peluquería Glam", error: "Insufficient funds" }, createdAt: new Date(Date.now() - 4 * 60 * 60 * 1000) },
-    { id: "log_4", tenantId: "maatwork-hq", userId: "founder-2", action: "USER_REGISTERED", details: { userName: "Federico L.", role: "admin" }, createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000) },
+    { id: "log_1", appId: "maatwork-hq", userId: "founder-1", action: "APP_CREATED", details: { appName: "Natatorio Splasher" }, createdAt: new Date(Date.now() - 15 * 60 * 1000) },
+    { id: "log_2", appId: "maatwork-hq", userId: "founder-1", action: "SECURITY_UPDATE", details: { patch: "v1.0.1", appliedTo: "all" }, createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000) },
+    { id: "log_3", appId: "demo-natatorio", userId: "founder-1", action: "PAYMENT_FAILED", details: { appName: "Peluquería Glam", error: "Insufficient funds" }, createdAt: new Date(Date.now() - 4 * 60 * 60 * 1000) },
+    { id: "log_4", appId: "maatwork-hq", userId: "founder-2", action: "USER_REGISTERED", details: { userName: "Federico L.", role: "admin" }, createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000) },
   ]).onConflictDoNothing();
 
   console.log('Seed completed successfully!');
