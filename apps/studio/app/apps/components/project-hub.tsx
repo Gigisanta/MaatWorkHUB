@@ -6,6 +6,7 @@ import { getVercelProjectMeta } from "../../../lib/vercel";
 import { ProjectHubProps } from "./project-hub-types";
 import { LinkProjectForm } from "./link-project-form";
 import { ShieldCheck } from "lucide-react";
+import { SyncStatus } from "./sync-status";
 
 export async function ProjectHub({ appId, githubRepo, vercelProjectId, vercelUrl, isInternal, neonUrl }: ProjectHubProps) {
   const githubMeta = githubRepo ? await getGitHubRepoMeta(githubRepo) : null;
@@ -36,11 +37,14 @@ export async function ProjectHub({ appId, githubRepo, vercelProjectId, vercelUrl
           <div className="flex-1 space-y-1">
             <div className="flex items-center justify-between">
               <h4 className="font-semibold text-white/90">Repositorio GitHub</h4>
-              {githubMeta && (
-                <Badge variant="outline" className="text-[10px] font-mono border-white/10 bg-white/5">
-                  {githubMeta.lastCommit ? new Date(githubMeta.lastCommit).toLocaleDateString() : "No commits"}
-                </Badge>
-              )}
+              <div className="flex items-center gap-2">
+                {githubRepo && <SyncStatus appId={appId} />}
+                {githubMeta && (
+                  <Badge variant="outline" className="text-[10px] font-mono border-white/10 bg-white/5">
+                    {githubMeta.lastCommit ? new Date(githubMeta.lastCommit).toLocaleDateString() : "No commits"}
+                  </Badge>
+                )}
+              </div>
             </div>
             <p className="text-sm text-white/40 font-mono">
               {githubRepo || "Sin vincular"}
@@ -130,8 +134,8 @@ export async function ProjectHub({ appId, githubRepo, vercelProjectId, vercelUrl
             {neonUrl && (
               <div className="pt-2">
                 <Button variant="link" size="sm" className="h-auto p-0 text-primary" asChild>
-                  <a href={neonUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
-                    Ver en Neon <ExternalLink className="h-3 w-3" />
+                  <a href="https://console.neon.tech/app/projects" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
+                    Ver en Neon Console <ExternalLink className="h-3 w-3" />
                   </a>
                 </Button>
               </div>

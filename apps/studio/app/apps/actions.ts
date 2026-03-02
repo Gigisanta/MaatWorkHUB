@@ -3,25 +3,30 @@
 import { z } from "zod";
 import { founderActionClient } from "@maatwork/auth/safe-action";
 import { db } from "@maatwork/database";
-import { apps, users, pricing_plans, app_subscriptions, activity_logs } from "@maatwork/database/schema";
+import { apps, users, pricing_plans, app_subscriptions, activity_logs, audit_logs } from "@maatwork/database/schema";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { createRepoFromTemplate, getGitHubRepoMeta } from "../../lib/github";
+import { createVercelProject, setVercelEnvVar } from "../../lib/vercel";
+import { createNeonProject } from "../../lib/neon";
 
 const createAppSchema = z.object({
   name: z.string().min(2, "Nombre muy corto"),
   slug: z.string().min(3, "Subdominio muy corto").regex(/^[a-z0-9-]+$/),
-  template: z.enum(["base", "natatorio", "peluqueria"]),
+  template: z.string(),
   githubRepo: z.string().optional(),
   vercelProjectId: z.string().optional(),
   vercelUrl: z.string().optional(),
   neonUrl: z.string().optional(),
   isInternal: z.boolean().default(false),
+  autoProvision: z.boolean().default(false),
+  templateRepo: z.string().optional(),
 });
 
 export const createAppAction = founderActionClient
   .schema(createAppSchema)
-  .action(async ({ parsedInput: { name, slug, template, githubRepo, vercelProjectId, vercelUrl, neonUrl, isInternal } }) => {
+  .action(async ({ parsedInput: { name, slug, template, githubRepo, vercelProjectId, vercelUrl, neonUrl, isInternal, autoProvision, templateRepo }, ctx: { session } }) => {
     // 1. Validate Uniqueness
     const existing = await db.query.apps.findFirst({
         where: (t, { eq }) => eq(t.slug, slug)
@@ -31,9 +36,64 @@ export const createAppAction = founderActionClient
         throw new Error("El subdominio ya está en uso.");
     }
 
+    let finalGithubRepo = githubRepo;
+    let finalVercelProjectId = vercelProjectId;
+    let finalVercelUrl = vercelUrl;
+    let finalNeonUrl = neonUrl;
+    let finalNeonProjectId = undefined;
+    let provisioningStatus: 'pending' | 'active' | 'failed' = 'pending';
+    let templateCommitSha = undefined;
+
+    // 2. Automated Provisioning if requested
+    if (autoProvision && templateRepo) {
+        provisioningStatus = 'active';
+        console.log(`[PROVISIONING] Starting auto-provisioning for ${slug}...`);
+
+        try {
+            // A. Neon Project Creation
+            const neonProject = await createNeonProject(`maat-${slug}`);
+            if (neonProject) {
+                finalNeonUrl = neonProject.connection_uri;
+                finalNeonProjectId = neonProject.id;
+                console.log(`[PROVISIONING] Neon project created: ${neonProject.id}`);
+            }
+
+            // B. GitHub Repo from Template
+            const newRepoName = `maat-${slug}`;
+            const createdRepo = await createRepoFromTemplate(templateRepo, newRepoName);
+            if (createdRepo) {
+                finalGithubRepo = createdRepo;
+                console.log(`[PROVISIONING] GitHub repo created: ${createdRepo}`);
+
+                // Get Initial Template SHA for future syncs
+                const repoMeta = await getGitHubRepoMeta(createdRepo);
+                if (repoMeta) {
+                    templateCommitSha = repoMeta.lastCommitSha;
+                }
+
+                // C. Vercel Project Linking
+                const vercelProject = await createVercelProject(`maat-${slug}`, createdRepo);
+                if (vercelProject) {
+                    finalVercelProjectId = vercelProject.id;
+                    finalVercelUrl = vercelProject.url;
+                    console.log(`[PROVISIONING] Vercel project created: ${vercelProject.id}`);
+
+                    // D. Set Environment Variables in Vercel
+                    if (finalNeonUrl) {
+                        await setVercelEnvVar(vercelProject.id, "DATABASE_URL", finalNeonUrl);
+                    }
+                    await setVercelEnvVar(vercelProject.id, "NEXT_PUBLIC_APP_URL", `https://${slug}.maat.work`);
+                }
+            }
+        } catch (error) {
+            console.error("[PROVISIONING ERROR]", error);
+            provisioningStatus = 'failed';
+        }
+    }
+
     const appId = crypto.randomUUID();
 
-    // 2. ACID Transaction for Core Onboarding
+    // 3. ACID Transaction for Core Onboarding
     await db.transaction(async (tx) => {
       // Create App
       await tx.insert(apps).values({
@@ -41,10 +101,13 @@ export const createAppAction = founderActionClient
         name,
         slug,
         template,
-        githubRepo,
-        vercelProjectId,
-        vercelUrl,
-        neonUrl,
+        githubRepo: finalGithubRepo,
+        vercelProjectId: finalVercelProjectId,
+        vercelUrl: finalVercelUrl,
+        neonUrl: finalNeonUrl,
+        neonProjectId: finalNeonProjectId,
+        provisioningStatus,
+        templateCommitSha,
         isInternal,
       });
 
@@ -80,9 +143,21 @@ export const createAppAction = founderActionClient
       await tx.insert(activity_logs).values({
         id: crypto.randomUUID(),
         appId: appId,
-        userId: adminId, // Initially attributed to the new admin
+        userId: session.user.id,
         action: "APP_LAUNCHED",
-        details: { name, template, timestamp: new Date().toISOString() }
+        details: { name, template, autoProvision, timestamp: new Date().toISOString() }
+      });
+
+      // Audit Log
+      await tx.insert(audit_logs).values({
+        id: crypto.randomUUID(),
+        appId: appId,
+        userId: session.user.id,
+        action: autoProvision ? "app.provisioned" : "app.created",
+        entityType: "apps",
+        entityId: appId,
+        metadata: { name, slug, template, autoProvision },
+        createdAt: new Date(),
       });
     });
 

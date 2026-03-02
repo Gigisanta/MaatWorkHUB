@@ -6,14 +6,27 @@ export const apps = pgTable('apps', {
   slug: text("slug").notNull().unique(),
   name: text("name").notNull(),
   domain: text("domain").unique(), // Custom domain (optional)
-  template: text("template", { enum: ["base", "natatorio", "peluqueria"] }).notNull().default("base"),
+  template: text("template").notNull().default("base"),
   config: jsonb('config'),
   githubRepo: text('github_repo'), // e.g., "username/repo"
   vercelProjectId: text('vercel_project_id'),
   vercelUrl: text('vercel_url'),
   neonUrl: text('neon_url'),
+  neonProjectId: text('neon_project_id'),
+  provisioningStatus: text('provisioning_status', { enum: ['pending', 'provisioning', 'active', 'failed'] }).default('pending'),
+  templateCommitSha: text('template_commit_sha'),
+  lastSyncAt: timestamp('last_sync_at'),
   isInternal: boolean('is_internal').default(false),
   createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const templates = pgTable('templates', {
+  id: text('id').primaryKey(),
+  name: text('name').notNull(),
+  githubRepo: text('github_repo').notNull(),
+  description: text('description'),
+  category: text('category'), // e.g., 'fitness', 'beauty', 'saas'
+  createdAt: timestamp('created_at').defaultNow(),
 });
 
 export const users = pgTable('users', {
@@ -174,6 +187,13 @@ export const lead_activities = pgTable('lead_activities', {
   metadata: jsonb('metadata'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
+
+export const appsRelations = relations(apps, ({ one }) => ({
+  templateData: one(templates, {
+    fields: [apps.template],
+    references: [templates.id],
+  }),
+}));
 
 export const leadsRelations = relations(leads, ({ many }) => ({
   activities: many(lead_activities),
