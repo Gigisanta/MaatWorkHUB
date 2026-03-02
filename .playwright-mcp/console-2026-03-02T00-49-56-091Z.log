@@ -1,0 +1,54 @@
+[     303ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3001/pipeline:0
+[     551ms] Error: ./Downloads/MaatWork/apps/studio/app/pipeline/export-actions.ts:5:1
+Module not found: Can't resolve '../../lib/safe-action'
+  3 | import { db } from "@maatwork/database";
+  4 | import { leads } from "@maatwork/database/schema";
+> 5 | import { founderActionClient } from "../../lib/safe-action";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { z } from "zod";
+  7 | import { activity_logs } from "@maatwork/database/schema";
+  8 | import { v4 as uuid } from "uuid";
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./Downloads/MaatWork/apps/studio/app/pipeline/export-actions.ts:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at Object.getCompilationErrors (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1008:59)
+    at DevBundlerService.getCompilationError (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/dev/next-dev-server.js:706:42)
+    at DevServer.findPageComponents (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/dev/next-dev-server.js:676:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/base-server.js:1733:26)
+[     555ms] [ERROR] ./Downloads/MaatWork/apps/studio/app/pipeline/export-actions.ts:5:1
+Module not found: Can't resolve '../../lib/safe-action'
+  3 | import { db } from "@maatwork/database";
+  4 | import { leads } from "@maatwork/database/schema";
+> 5 | import { founderActionClient } from "../../lib/safe-action";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { z } from "zod";
+  7 | import { activity_logs } from "@maatwork/database/schema";
+  8 | import { v4 as uuid } from "uuid";
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[     559ms] [ERROR] ./Downloads/MaatWork/apps/studio/app/pipeline/export-actions.ts:5:1
+Module not found: Can't resolve '../../lib/safe-action'
+  3 | import { db } from "@maatwork/database";
+  4 | import { leads } from "@maatwork/database/schema";
+> 5 | import { founderActionClient } from "../../lib/safe-action";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { z } from "zod";
+  7 | import { activity_logs } from "@maatwork/database/schema";
+  8 | import { v4 as uuid } from "uuid";
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[  121098ms] NeonDbError: column "external_sync_id" does not exist
+    at  NeonHttpPreparedQuery.execute (about://React/Server/file:///Users/prueba/Downloads/MaatWork/apps/studio/.next/dev/server/chunks/ssr/3ae62__pnpm_26fecff4._.js?21:10943:24)
+    at  getLeads (about://React/Server/file:///Users/prueba/Downloads/MaatWork/apps/studio/.next/dev/server/chunks/ssr/%5Broot-of-the-server%5D__7fe8080f._.js?22:41:12)
+    at  PipelinePage (about://React/Server/file:///Users/prueba/Downloads/MaatWork/apps/studio/.next/dev/server/chunks/ssr/%5Broot-of-the-server%5D__92a6cad9._.js?23:109:26)
+    at resolveErrorDev (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:1894:148)
+    at processFullStringRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2402:29)
+    at processFullBinaryRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2361:9)
+    at processBinaryChunk (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2470:221)
+    at progress (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2640:13)

@@ -1,38 +1,31 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import { db } from "@maatwork/database";
+import { tenants } from "@maatwork/database/schema";
+import HubLayoutClient from "./layout-client";
 import { ReactNode } from "react";
-import { DesktopSidebar, MobileNav, NavItem } from "@maatwork/ui";
-import { LayoutDashboard, Users, GitMerge, Receipt } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Maatwork Studio",
-  description: "Internal HQ for Maatwork",
-};
-
-const studioNav: NavItem[] = [
-  { title: "Dashboard", href: "/", icon: LayoutDashboard },
-  { title: "Pipeline", href: "/pipeline", icon: GitMerge },
-  { title: "Tenants", href: "/tenants", icon: Users },
-  { title: "Billing", href: "/billing", icon: Receipt },
-];
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: ReactNode;
 }) {
+  let allTenants = [];
+  try {
+    allTenants = await db.select().from(tenants);
+  } catch (error) {
+    console.warn("Could not fetch tenants, database might not be initialized:", error);
+  }
+
   return (
-    <html lang="en" className="dark">
-      <body className="antialiased font-sans flex flex-col md:flex-row min-h-screen selection:bg-primary selection:text-primary-foreground bg-background text-foreground">
-        <MobileNav items={studioNav} title="Maatwork HQ" />
-        <DesktopSidebar items={studioNav} title="Maatwork HQ" />
+    <HubLayoutClient allTenants={allTenants}>
+      <div className="relative min-h-screen">
+        {/* Background gradient for premium feel */}
+        <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-zinc-900 via-zinc-950 to-black -z-10" />
+        <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 pointer-events-none -z-10" />
         
-        <main className="flex-1 p-4 md:p-8 overflow-y-auto">
-          {children}
-        </main>
-      </body>
-    </html>
+        {children}
+      </div>
+    </HubLayoutClient>
   );
 }

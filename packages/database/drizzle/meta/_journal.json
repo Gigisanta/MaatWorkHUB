@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1772399329645,
+      "tag": "0000_normal_callisto",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1772407357429,
+      "tag": "0001_red_bug",
+      "breakpoints": true
+    }
+  ]
+}

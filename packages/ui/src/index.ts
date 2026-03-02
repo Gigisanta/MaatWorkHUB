@@ -25,3 +25,5 @@ export * from "./components/ui/mobile-nav";
 export * from "./components/ui/desktop-sidebar";
 export * from "./components/ui/recent-activity";
 export * from "./components/ui/badge";
+export * from "./components/ui/hub-context-switcher";
+export * from "./components/ui/glass-card";

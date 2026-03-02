@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean, jsonb, decimal } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, boolean, jsonb, decimal, uuid } from 'drizzle-orm/pg-core';
 
 export const tenants = pgTable('tenants', {
   id: text('id').primaryKey(),
@@ -7,6 +7,10 @@ export const tenants = pgTable('tenants', {
   domain: text("domain").unique(), // Custom domain (optional)
   template: text("template", { enum: ["base", "natatorio", "peluqueria"] }).notNull().default("base"),
   config: jsonb('config'),
+  githubRepo: text('github_repo'), // e.g., "username/repo"
+  vercelProjectId: text('vercel_project_id'),
+  vercelUrl: text('vercel_url'),
+  isInternal: boolean('is_internal').default(false),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -112,3 +116,72 @@ export const notifications = pgTable('notifications', {
   read: boolean('read').default(false),
   createdAt: timestamp('created_at').defaultNow(),
 });
+
+// Maatwork Hub -> Tenant Billing
+export const tenant_subscriptions = pgTable('tenant_subscriptions', {
+  id: text('id').primaryKey(),
+  tenantId: text('tenant_id').notNull().references(() => tenants.id),
+  stripeCustomerId: text('stripe_customer_id'),
+  stripeSubscriptionId: text('stripe_subscription_id'),
+  planId: text('plan_id').notNull(),
+  status: text('status').$type<'active' | 'past_due' | 'canceled' | 'trialing'>().default('active'),
+  currentPeriodEnd: timestamp('current_period_end'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export const tenant_invoices = pgTable('tenant_invoices', {
+  id: text('id').primaryKey(),
+  tenantId: text('tenant_id').notNull().references(() => tenants.id),
+  amount: decimal('amount', { precision: 10, scale: 2 }).notNull(),
+  currency: text('currency').default('ARS'),
+  status: text('status').$type<'paid' | 'open' | 'void' | 'uncollectible'>().default('open'),
+  invoiceUrl: text('invoice_url'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export const studio_todos = pgTable('studio_todos', {
+  id: text('id').primaryKey(),
+  text: text('text').notNull(),
+  completed: boolean('completed').notNull().default(false),
+  priority: text('priority').$type<'low' | 'medium' | 'high'>().notNull().default('medium'),
+  dueDate: timestamp('due_date'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export const leads = pgTable('leads', {
+  id: text('id').primaryKey(),
+  name: text('name').notNull(),
+  email: text('email'),
+  company: text('company'),
+  status: text('status').$type<'new' | 'contacted' | 'proposal' | 'won' | 'lost'>().notNull().default('new'),
+  value: decimal('value', { precision: 10, scale: 2 }),
+  notes: text('notes'),
+  externalSyncId: text('external_sync_id'), // Integration with HubSpot/Salesforce
+  lastSyncedAt: timestamp('last_synced_at'),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
+export const audit_logs = pgTable("audit_logs", {
+  id: text("id").primaryKey(),
+  tenantId: text("tenant_id").references(() => tenants.id),
+  userId: text("user_id").references(() => users.id),
+  action: text("action").notNull(), // e.g., 'lead.exported', 'tenant.status_changed'
+  entityType: text("entity_type").notNull(), // e.g., 'leads', 'tenants'
+  entityId: text("entity_id"),
+  metadata: jsonb("metadata"), // Contextual data: { format: 'csv', count: 50 }
+  ipAddress: text("ip_address"),
+  userAgent: text("user_agent"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const analytics_events = pgTable("analytics_events", {
+  id: text("id").primaryKey(),
+  tenantId: text("tenant_id").references(() => tenants.id),
+  eventType: text("event_type").notNull(), // 'mrr.update', 'session.start', 'feature.usage'
+  source: text("source").notNull(), // 'studio', 'tenant-app', 'system'
+  value: decimal("value", { precision: 15, scale: 2 }), // Useful for MRR or durations
+  metadata: jsonb("metadata"), // { feature: 'billing', duration: 120 }
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+

@@ -1,0 +1,16 @@
+[    2904ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3001/natatorio:0
+[    3128ms] [ERROR] %c%s%c Only plain objects can be passed to Client Components from Server Components. Classes or other objects with methods are not supported.%s background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   
+  {id: "log_3", title: ..., description: ..., timestamp: ..., icon: {$$typeof: ..., render: ...}, variant: ...}
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ @ http://localhost:3001/_next/static/chunks/94473_next_dist_5e9d9b1f._.js:3127
+[    3343ms] Error: Functions cannot be passed directly to Client Components unless you explicitly expose it by marking it with "use server". Or maybe you meant to call this function rather than return it.
+  {$$typeof: ..., render: function TrendingUp}
+                          ^^^^^^^^^^^^^^^^^^^
+    at stringify (<anonymous>:1:18)
+    at stringify (<anonymous>:1:18)
+    at stringify (<anonymous>:1:18)
+    at resolveErrorDev (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:1894:148)
+    at processFullStringRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2402:29)
+    at processFullBinaryRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2361:9)
+    at processBinaryChunk (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2470:221)
+    at progress (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2640:13)
+[    6420ms] [WARNING] The resource http://localhost:3001/_next/static/chunks/Downloads_MaatWork_apps_studio_app_globals_520f2214.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3001/natatorio:0

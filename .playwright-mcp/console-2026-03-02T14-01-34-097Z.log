@@ -1,0 +1,103 @@
+[   43702ms] ReferenceError: sql is not defined
+    at StudioKPIs (about://React/Server/file:///Users/prueba/Downloads/MaatWork/apps/studio/.next/dev/server/chunks/ssr/%5Broot-of-the-server%5D__45ef90aa._.js?51:175:191)
+    at resolveErrorDev (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:1894:148)
+    at processFullStringRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2402:29)
+    at processFullBinaryRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2361:9)
+    at processBinaryChunk (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2470:221)
+    at progress (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2640:13)
+[   50594ms] [WARNING] The resource http://localhost:3001/_next/static/chunks/Downloads_MaatWork_apps_studio_app_globals_520f2214.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3001/:0
+[  170119ms] [ERROR] WebSocket connection to 'ws://localhost:3001/_next/webpack-hmr?id=c5m8OJQfnrWFQVg3hw0mn' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/_next/static/chunks/94473_next_dist_client_4dbc6c08._.js:10878
+[  171125ms] [ERROR] WebSocket connection to 'ws://localhost:3001/_next/webpack-hmr?id=c5m8OJQfnrWFQVg3hw0mn' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/_next/static/chunks/94473_next_dist_client_4dbc6c08._.js:10878
+[  172121ms] [ERROR] WebSocket connection to 'ws://localhost:3001/_next/webpack-hmr?id=c5m8OJQfnrWFQVg3hw0mn' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/_next/static/chunks/94473_next_dist_client_4dbc6c08._.js:10878
+[  173122ms] [ERROR] WebSocket connection to 'ws://localhost:3001/_next/webpack-hmr?id=c5m8OJQfnrWFQVg3hw0mn' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/_next/static/chunks/94473_next_dist_client_4dbc6c08._.js:10878
+[  178600ms] [WARNING] The resource http://localhost:3001/_next/static/chunks/Downloads_MaatWork_apps_studio_app_globals_520f2214.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3001/:0
+[  184056ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <html lang="en" className="dark">
+      <body className="antialiase...">
+        <div className="flex h-scr...">
+          <div>
+          ...
+            <SelectCollectionProviderProvider scope={undefined} itemMap={Map} collectionRef={{current:null}}>
+              <SelectProvider scope={undefined} onNativeOptionAdd={function Select.useCallback} ...>
+                <_c className="w-full bg-...">
+                  <SelectTrigger ref={null} className={"flex h-1..."}>
+                    <PopperAnchor asChild={true} __scopePopper={{Popper:[...]}}>
+                      <Primitive.div asChild={true} ref={function}>
+                        <Primitive.div.Slot ref={function}>
+                          <Primitive.div.SlotClone ref={function}>
+                            <Primitive.button type="button" role="combobox" aria-controls="radix-_R_ilb_" ...>
+                              <button
+                                type="button"
+                                role="combobox"
++                               aria-controls="radix-_R_ilb_"
+-                               aria-controls="radix-_R_2alb_"
+                                aria-expanded={false}
+                                aria-required={undefined}
+                                aria-autocomplete="none"
+                                dir="ltr"
+                                data-state="closed"
+                                disabled={false}
+                                data-disabled={undefined}
+                                data-placeholder={undefined}
+                                className={"flex h-10 items-center justify-between rounded-md border px-3 py-2 text-s..."}
+                                onClick={function handleEvent}
+                                onPointerDown={function handleEvent}
+                                onKeyDown={function handleEvent}
+                                ref={function}
+                              >
+                ...
+          <div className="flex flex-...">
+            <header className="md:hidden ...">
+              <div>
+              <MobileNav items={[...]} title="MAATWORK HUB">
+                <div className="md:hidden ...">
+                  <Dialog open={false} onOpenChange={function bound dispatchSetState}>
+                    <DialogProvider scope={undefined} triggerRef={{current:null}} contentRef={{current:null}} ...>
+                      <DialogTrigger asChild={true}>
+                        <Primitive.button type="button" aria-haspopup="dialog" aria-expanded={false} ...>
+                          <Primitive.button.Slot type="button" aria-haspopup="dialog" aria-expanded={false} ...>
+                            <Primitive.button.SlotClone type="button" aria-haspopup="dialog" aria-expanded={false} ...>
+                              <_c variant="ghost" size="icon" className="mr-2" type="button" aria-haspopup="dialog" ...>
+                                <button
+                                  className={"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded..."}
+                                  ref={function}
+                                  type="button"
+                                  aria-haspopup="dialog"
+                                  aria-expanded={false}
++                                 aria-controls="radix-_R_1htb_"
+-                                 aria-controls="radix-_R_67lb_"
+                                  data-state="closed"
+                                  onClick={function handleEvent}
+                                >
+                      ...
+                  ...
+            ...
+ @ http://localhost:3001/_next/static/chunks/94473_next_dist_5e9d9b1f._.js:3127
+[  184725ms] ReferenceError: sql is not defined
+    at StudioKPIs (about://React/Server/file:///Users/prueba/Downloads/MaatWork/apps/studio/.next/dev/server/chunks/ssr/%5Broot-of-the-server%5D__45ef90aa._.js?51:175:191)
+    at resolveErrorDev (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:1894:148)
+    at processFullStringRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2402:29)
+    at processFullBinaryRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2361:9)
+    at processBinaryChunk (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2470:221)
+    at progress (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2640:13)
+[  195724ms] [WARNING] The resource http://localhost:3001/_next/static/chunks/Downloads_MaatWork_apps_studio_app_globals_520f2214.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3001/:0
+[  209298ms] ReferenceError: sql is not defined
+    at StudioKPIs (about://React/Server/file:///Users/prueba/Downloads/MaatWork/apps/studio/.next/dev/server/chunks/ssr/%5Broot-of-the-server%5D__45ef90aa._.js?51:175:191)
+    at resolveErrorDev (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:1894:148)
+    at processFullStringRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2402:29)
+    at processFullBinaryRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2361:9)
+    at processBinaryChunk (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2470:221)
+    at progress (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2640:13)
+[  212524ms] [WARNING] The resource http://localhost:3001/_next/static/chunks/Downloads_MaatWork_apps_studio_app_globals_520f2214.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3001/:0

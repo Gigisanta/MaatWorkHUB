@@ -6,7 +6,8 @@ export function middleware(req: NextRequest) {
   const hostname = req.headers.get('host') || '';
   
   if (
-    url.pathname.startsWith('/api') ||
+    url.pathname.startsWith('/login') ||
+    url.pathname.startsWith('/api/auth') ||
     url.pathname.startsWith('/_next') ||
     url.pathname.includes('.')
   ) {

@@ -1,0 +1,7 @@
+[   47483ms] ReferenceError: db is not defined
+    at TenantManagementPage (about://React/Server/file:///Users/prueba/Downloads/MaatWork/apps/studio/.next/dev/server/chunks/ssr/%5Broot-of-the-server%5D__4a96d61b._.js?34:1979:26)
+    at resolveErrorDev (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:1894:148)
+    at processFullStringRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2402:29)
+    at processFullBinaryRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2361:9)
+    at processBinaryChunk (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2470:221)
+    at progress (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2640:13)

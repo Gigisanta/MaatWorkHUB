@@ -1,0 +1,155 @@
+"use client";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input, Label, Select, SelectContent,SelectItem, SelectTrigger, SelectValue, Checkbox } from "@maatwork/ui";
+import { useAction } from "next-safe-action/hooks";
+import { createTenantAction } from "../actions";
+import { toast } from "sonner";
+import { Rocket, Building2, Globe, Layout, Github, Activity } from "lucide-react";
+
+const schema = z.object({
+  name: z.string().min(2, "Mínimo 2 caracteres"),
+  slug: z.string().min(3, "Mínimo 3 caracteres").regex(/^[a-z0-9-]+$/, "Solo minúsculas, números y guiones"),
+  template: z.enum(["base", "natatorio", "peluqueria"]),
+  githubRepo: z.string().optional(),
+  vercelProjectId: z.string().optional(),
+  vercelUrl: z.string().optional(),
+  isInternal: z.boolean().default(false),
+});
+
+type FormData = z.infer<typeof schema>;
+
+export default function NewTenantPage() {
+  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      template: "base",
+    }
+  });
+
+  const { execute, isPending } = useAction(createTenantAction, {
+    onSuccess: () => toast.success("Centro creado y provisionado con éxito"),
+    onError: ({ error }) => toast.error(error.serverError || "Error al crear el centro"),
+  });
+
+  return (
+    <div className="max-w-2xl mx-auto space-y-8 py-10">
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight">Desplegar Nuevo Centro</h1>
+        <p className="text-muted-foreground">Provisionamiento automático de base de datos, subdominio y plantilla.</p>
+      </div>
+
+      <Card className="border-primary/20 bg-card/50 backdrop-blur-xl">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Building2 className="w-5 h-5 text-primary" />
+            Configuración Core
+          </CardTitle>
+          <CardDescription>Define la identidad y el motor de este nuevo centro.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit((data) => execute(data))} className="space-y-6">
+            <div className="space-y-2">
+              <Label className="flex items-center gap-2">
+                <Building2 className="w-4 h-4" /> Nombre Comercial
+              </Label>
+              <Input {...register("name")} placeholder="Ej: Natatorio Central" className="bg-background/50" />
+              {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
+            </div>
+
+            <div className="space-y-2">
+              <Label className="flex items-center gap-2">
+                <Globe className="w-4 h-4" /> Subdominio personalizado
+              </Label>
+              <div className="flex items-center gap-2">
+                <Input {...register("slug")} placeholder="natatorio-central" className="bg-background/50" />
+                <span className="text-sm font-medium text-muted-foreground whitespace-nowrap">.maat.work</span>
+              </div>
+              {errors.slug && <p className="text-xs text-destructive">{errors.slug.message}</p>}
+            </div>
+
+            <div className="space-y-2">
+              <Label className="flex items-center gap-2">
+                <Layout className="w-4 h-4" /> Business Template
+              </Label>
+              <Select onValueChange={(v) => setValue("template", v as any)} defaultValue="base">
+                <SelectTrigger className="bg-background/50">
+                  <SelectValue placeholder="Selecciona una plantilla" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="base">General (Base)</SelectItem>
+                  <SelectItem value="natatorio">Natatorio / Fitness</SelectItem>
+                  <SelectItem value="peluqueria">Salón de Belleza / Peluquería</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-4 pt-4 border-t border-white/5">
+                <h3 className="text-sm font-bold flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-primary" />
+                    App Hub (Opcional)
+                </h3>
+                
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                        <Label className="flex items-center gap-2 text-xs uppercase tracking-tighter text-white/40">
+                            <Github className="w-3 h-3" /> GitHub Repo
+                        </Label>
+                        <Input {...register("githubRepo")} placeholder="user/repo" className="bg-background/50 h-8 text-xs" />
+                    </div>
+                    <div className="space-y-2">
+                        <Label className="flex items-center gap-2 text-xs uppercase tracking-tighter text-white/40">
+                             Vercel Project
+                        </Label>
+                        <Input {...register("vercelProjectId")} placeholder="prj_..." className="bg-background/50 h-8 text-xs" />
+                    </div>
+                </div>
+
+                <div className="space-y-2">
+                    <Label className="flex items-center gap-2 text-xs uppercase tracking-tighter text-white/40">
+                        Vercel Production URL
+                    </Label>
+                    <Input {...register("vercelUrl")} placeholder="https://..." className="bg-background/50 h-8 text-xs" />
+                </div>
+
+                <div className="flex items-center space-x-2 pt-2">
+                    <Checkbox 
+                        id="isInternal" 
+                        onCheckedChange={(checked) => setValue("isInternal", !!checked)}
+                    />
+                    <label
+                        htmlFor="isInternal"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 transition-colors cursor-pointer"
+                    >
+                        Esta es una aplicación propia (Internal App)
+                    </label>
+                </div>
+            </div>
+
+            <Button type="submit" className="w-full gap-2" size="lg" disabled={isPending}>
+              <Rocket className="w-4 h-4" />
+              {isPending ? "Provisionando..." : "Lanzar Centro"}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+
+      <div className="grid grid-cols-3 gap-4 text-center">
+        <div className="p-4 rounded-lg border bg-card/30">
+          <div className="text-xl font-bold text-primary">8min</div>
+          <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Provisioning</div>
+        </div>
+        <div className="p-4 rounded-lg border bg-card/30">
+          <div className="text-xl font-bold text-primary">SSL</div>
+          <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Automatic</div>
+        </div>
+        <div className="p-4 rounded-lg border bg-card/30">
+          <div className="text-xl font-bold text-primary">DB</div>
+          <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Isolating</div>
+        </div>
+      </div>
+    </div>
+  );
+}

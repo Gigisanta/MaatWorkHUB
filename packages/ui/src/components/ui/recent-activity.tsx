@@ -1,15 +1,15 @@
 "use client";
 
+import { ReactNode } from "react";
 import { cn } from "../../lib/utils";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./card";
-import { LucideIcon } from "lucide-react";
 
 export interface ActivityItem {
   id: string;
   title: string;
   description: string;
   timestamp: string;
-  icon: LucideIcon;
+  icon: ReactNode;
   variant?: "default" | "success" | "warning" | "destructive";
 }
 
@@ -37,13 +37,13 @@ export function RecentActivity({
           {items.map((item) => (
             <div key={item.id} className="relative flex gap-4 pl-1">
               <div className={cn(
-                "relative z-10 flex h-9 w-9 items-center justify-center rounded-full border bg-background shadow-sm",
+                "relative z-10 flex h-9 w-9 items-center justify-center rounded-full border bg-background shadow-sm [&>svg]:h-4 [&>svg]:w-4",
                 item.variant === "success" && "border-green-500/50 text-green-500",
                 item.variant === "warning" && "border-yellow-500/50 text-yellow-500",
                 item.variant === "destructive" && "border-red-500/50 text-red-500",
                 !item.variant && "border-muted-foreground/20 text-muted-foreground"
               )}>
-                <item.icon className="h-4 w-4" />
+                {item.icon}
               </div>
               <div className="flex flex-col gap-1 pt-1 text-sm">
                 <div className="font-medium leading-none">{item.title}</div>

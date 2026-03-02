@@ -1,0 +1,172 @@
+[    1925ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3001/pipeline:0
+[    2087ms] Error: ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx:6:1
+Module not found: Can't resolve 'sonner'
+  4 | import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@maatwork/ui";
+  5 | import { updateLeadStatus } from "../lead-actions";
+> 6 | import { toast } from "sonner";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | interface Lead {
+  9 |   id: string;
+
+
+
+Import trace:
+  Server Component:
+    ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx
+    ./Downloads/MaatWork/apps/studio/app/pipeline/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at Object.getCompilationErrors (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1008:59)
+    at DevBundlerService.getCompilationError (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/dev/next-dev-server.js:706:42)
+    at DevServer.findPageComponents (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/dev/next-dev-server.js:676:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/prueba/Downloads/MaatWork/node_modules/.pnpm/next@16.1.6_@babel+core@7.29.0_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/server/base-server.js:1733:26)
+[    2144ms] [ERROR] ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx:6:1
+Module not found: Can't resolve 'sonner'
+  4 | import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@maatwork/ui";
+  5 | import { updateLeadStatus } from "../lead-actions";
+> 6 | import { toast } from "sonner";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | interface Lead {
+  9 |   id: string;
+
+Import trace:
+  Server Component:
+    ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx
+    ./Downloads/MaatWork/apps/studio/app/pipeline/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[    2145ms] [ERROR] ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx:6:1
+Module not found: Can't resolve 'sonner'
+  4 | import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@maatwork/ui";
+  5 | import { updateLeadStatus } from "../lead-actions";
+> 6 | import { toast } from "sonner";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | interface Lead {
+  9 |   id: string;
+
+Import trace:
+  Server Component:
+    ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx
+    ./Downloads/MaatWork/apps/studio/app/pipeline/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[    8874ms] [ERROR] ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx:6:1
+Module not found: Can't resolve 'sonner'
+  4 | import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@maatwork/ui";
+  5 | import { updateLeadStatus } from "../lead-actions";
+> 6 | import { toast } from "sonner";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | interface Lead {
+  9 |   id: string;
+
+Import trace:
+  Server Component:
+    ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx
+    ./Downloads/MaatWork/apps/studio/app/pipeline/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[   10671ms] [ERROR] ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx:6:1
+Module not found: Can't resolve 'sonner'
+  4 | import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@maatwork/ui";
+  5 | import { updateLeadStatus } from "../lead-actions";
+> 6 | import { toast } from "sonner";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | interface Lead {
+  9 |   id: string;
+
+Import trace:
+  Server Component:
+    ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx
+    ./Downloads/MaatWork/apps/studio/app/pipeline/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[   10737ms] [ERROR] ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx:6:1
+Module not found: Can't resolve 'sonner'
+  4 | import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@maatwork/ui";
+  5 | import { updateLeadStatus } from "../lead-actions";
+> 6 | import { toast } from "sonner";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | interface Lead {
+  9 |   id: string;
+
+Import trace:
+  Server Component:
+    ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx
+    ./Downloads/MaatWork/apps/studio/app/pipeline/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[   10883ms] [ERROR] ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx:6:1
+Module not found: Can't resolve 'sonner'
+  4 | import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@maatwork/ui";
+  5 | import { updateLeadStatus } from "../lead-actions";
+> 6 | import { toast } from "sonner";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | interface Lead {
+  9 |   id: string;
+
+Import trace:
+  Server Component:
+    ./Downloads/MaatWork/apps/studio/app/pipeline/components/kanban-board.tsx
+    ./Downloads/MaatWork/apps/studio/app/pipeline/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3001/_next/static/chunks/94473_next_dist_663ae2c4._.js:1920
+[   12747ms] Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="page" pagePath="/Downloads...">
+      <SegmentTrieNode>
+      <PipelinePage>
+        <div className="space-y-6 ...">
+          <div>
+          <Suspense fallback={<div>}>
+            <KanbanBoard initialLeads={[...]}>
+              <div className="flex gap-4...">
+                <div className="flex-1 min..." onDragOver={function handleDragOver} onDrop={function onDrop}>
+                  <div>
+                  <div className="flex flex-...">
+                    <_c draggable={true} onDragStart={function onDragStart} className="cursor-gra...">
+                      <div ref={null} className="rounded-lg..." draggable={true} onDragStart={function onDragStart}>
+                        <_c2>
+                        <_c8 className="p-4 pt-0">
+                          <div ref={null} className="p-4 pt-0">
+                            <div className="text-[10px...">
+                              <span>
+                              <span>
++                               1/3/2026
+-                               3/1/2026
+                ...
+    ...
+
+    at throwOnHydrationMismatch (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-dom_19d38c6e._.js:3348:56)
+    at prepareToHydrateHostInstance (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-dom_19d38c6e._.js:3402:23)
+    at completeWork (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-dom_19d38c6e._.js:6934:60)
+    at runWithFiberInDEV (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-dom_19d38c6e._.js:965:74)
+    at completeUnitOfWork (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-dom_19d38c6e._.js:9627:23)
+    at performUnitOfWork (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-dom_19d38c6e._.js:9564:28)
+    at workLoopConcurrentByScheduler (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-dom_19d38c6e._.js:9558:58)
+    at renderRootConcurrent (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-dom_19d38c6e._.js:9541:71)
+    at performWorkOnRoot (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-dom_19d38c6e._.js:9068:150)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-dom_19d38c6e._.js:10230:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_027236b5._.js:2647:64)

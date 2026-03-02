@@ -11,15 +11,17 @@ interface DesktopSidebarProps {
 
 export function DesktopSidebar({ items, title, footer }: DesktopSidebarProps) {
   return (
-    <aside className="hidden md:flex w-64 flex-col border-r bg-muted/20 sticky top-0 h-screen">
-      <div className="flex h-14 items-center border-b px-6 font-bold text-lg">
-        {title}
-      </div>
-      <div className="flex-1 overflow-auto py-4">
+    <aside className="w-full flex flex-col h-full bg-transparent">
+      {title && (
+        <div className="flex h-14 items-center px-6 font-bold text-lg">
+          {title}
+        </div>
+      )}
+      <div className="flex-1 overflow-auto">
         <NavMain items={items} />
       </div>
       {footer && (
-        <div className="border-t p-4">
+        <div className="p-4 border-t border-muted-foreground/10">
           {footer}
         </div>
       )}

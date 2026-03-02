@@ -1,0 +1,9 @@
+[    1253ms] NeonDbError: column "external_sync_id" does not exist
+    at  NeonHttpPreparedQuery.execute (about://React/Server/file:///Users/prueba/Downloads/MaatWork/apps/studio/.next/dev/server/chunks/ssr/3ae62__pnpm_26fecff4._.js?21:10943:24)
+    at  getLeads (about://React/Server/file:///Users/prueba/Downloads/MaatWork/apps/studio/.next/dev/server/chunks/ssr/%5Broot-of-the-server%5D__7fe8080f._.js?22:41:12)
+    at  PipelinePage (about://React/Server/file:///Users/prueba/Downloads/MaatWork/apps/studio/.next/dev/server/chunks/ssr/%5Broot-of-the-server%5D__92a6cad9._.js?23:109:26)
+    at resolveErrorDev (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:1894:148)
+    at processFullStringRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2402:29)
+    at processFullBinaryRow (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2361:9)
+    at processBinaryChunk (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2470:221)
+    at progress (http://localhost:3001/_next/static/chunks/94473_next_dist_compiled_react-server-dom-turbopack_8791dc96._.js:2640:13)

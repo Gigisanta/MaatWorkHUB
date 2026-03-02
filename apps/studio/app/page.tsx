@@ -1,6 +1,6 @@
 import { db } from "@maatwork/database";
-import { tenants, users } from "@maatwork/database/schema";
-import { count } from "drizzle-orm";
+import { tenants, users, tenant_invoices } from "@maatwork/database/schema";
+import { count, sql } from "drizzle-orm";
 import { 
   Card, 
   CardContent, 
@@ -19,60 +19,76 @@ import {
   CheckCircle2, 
   AlertCircle, 
   UserPlus,
-  Clock
+  Clock,
+  Github,
+  ExternalLink
 } from "lucide-react";
 
 async function StudioKPIs() {
   const [
-    [tenantsData],
-    [usersData]
+    counts,
+    invoicesList,
   ] = await Promise.all([
-    db.select({ count: count() }).from(tenants),
-    db.select({ count: count() }).from(users),
+    // Group related counts in a single query if possible, or parallelize
+    Promise.all([
+      db.select({ count: count() }).from(tenants),
+      db.select({ count: count() }).from(users),
+      db.select({ count: count() }).from(tenants).where(sql`${tenants.githubRepo} IS NOT NULL`),
+      db.select({ count: count() }).from(tenants).where(sql`${tenants.vercelUrl} IS NOT NULL`),
+    ]),
+    db.select({ amount: tenant_invoices.amount, status: tenant_invoices.status }).from(tenant_invoices),
   ]);
 
-  const simulatedMRR = (tenantsData?.count || 0) * 120000;
+  const [tenantsCount, usersCount, githubCount, vercelCount] = counts.map(r => r[0]);
+
+  const mrr = invoicesList
+    .filter(inv => inv.status === 'paid')
+    .reduce((sum, inv) => sum + Number(inv.amount), 0);
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      <Card>
+      <Card className="border-white/5 bg-black/40 backdrop-blur-3xl group hover:border-primary/20 transition-all duration-500">
         <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-          <CardTitle className="text-sm font-medium">Ingresos Est. (MRR)</CardTitle>
-          <Zap className="h-4 w-4 text-primary" />
+          <CardTitle className="text-sm font-medium text-white/70">Ingresos Est. (MRR)</CardTitle>
+          <Zap className="h-4 w-4 text-primary animate-pulse" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">${simulatedMRR.toLocaleString()}</div>
-          <p className="text-xs text-muted-foreground">+ARS 240k vs mes pasado</p>
+          <div className="text-2xl font-bold bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
+            ${mrr.toLocaleString("es-AR")}
+          </div>
+          <p className="text-[10px] text-muted-foreground uppercase tracking-widest mt-1">
+            {invoicesList.filter(inv => inv.status === 'paid').length} facturas activas
+          </p>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="border-white/5 bg-black/40 backdrop-blur-3xl group hover:border-blue-500/20 transition-all duration-500">
         <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-          <CardTitle className="text-sm font-medium">Tenants Activos</CardTitle>
-          <Building2 className="h-4 w-4 text-muted-foreground" />
+          <CardTitle className="text-sm font-medium text-white/70">Centros Activos</CardTitle>
+          <Building2 className="h-4 w-4 text-blue-400" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{tenantsData?.count || 0}</div>
-          <p className="text-xs text-muted-foreground">+2 nuevos hoy</p>
+          <div className="text-2xl font-bold text-white/90">{tenantsCount?.count || 0}</div>
+          <p className="text-[10px] text-blue-400/60 uppercase tracking-widest mt-1">+2 este mes</p>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="border-white/5 bg-black/40 backdrop-blur-3xl group hover:border-green-500/20 transition-all duration-500">
         <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-          <CardTitle className="text-sm font-medium">Usuarios Totales</CardTitle>
-          <Users className="h-4 w-4 text-muted-foreground" />
+          <CardTitle className="text-sm font-medium text-white/70">GitHub Sync</CardTitle>
+          <Github className="h-4 w-4 text-green-400" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{usersData?.count || 0}</div>
-          <p className="text-xs text-muted-foreground">+12% de crecimiento</p>
+          <div className="text-2xl font-bold text-white/90">{githubCount?.count || 0}</div>
+          <p className="text-[10px] text-green-400/60 uppercase tracking-widest mt-1">Sincronizados</p>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="border-white/5 bg-black/40 backdrop-blur-3xl group hover:border-purple-500/20 transition-all duration-500">
         <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-          <CardTitle className="text-sm font-medium">SLA de Soporte</CardTitle>
-          <Clock className="h-4 w-4 text-muted-foreground" />
+          <CardTitle className="text-sm font-medium text-white/70">Vercel Active</CardTitle>
+          <ExternalLink className="h-4 w-4 text-purple-400" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">99.9%</div>
-          <p className="text-xs text-muted-foreground">Tiempo de respuesta &lt; 2h</p>
+          <div className="text-2xl font-bold text-white/90">{vercelCount?.count || 0}</div>
+          <p className="text-[10px] text-purple-400/60 uppercase tracking-widest mt-1">Despliegues</p>
         </CardContent>
       </Card>
     </div>
@@ -90,11 +106,35 @@ function StudioKPIsLoading() {
   );
 }
 
+import { getTodos } from "./todo-actions";
+import { TodoList } from "./components/todo-list";
+import { activity_logs } from "@maatwork/database/schema";
+import { desc } from "drizzle-orm";
+
 export default async function StudioHomePage() {
+  const [todos, logs] = await Promise.all([
+    getTodos(),
+    db.select().from(activity_logs).orderBy(desc(activity_logs.createdAt)).limit(10)
+  ]);
+
+  const activityItems: ActivityItem[] = logs.map(log => ({
+    id: log.id,
+    title: log.action.replace(/_/g, ' '),
+    description: JSON.stringify(log.details),
+    timestamp: log.createdAt?.toLocaleString() || "Reciente",
+    icon: log.action.includes('TENANT') ? <Building2 /> : 
+          log.action.includes('SECURITY') ? <CheckCircle2 /> :
+          log.action.includes('PAYMENT') ? <AlertCircle /> : <UserPlus />,
+    variant: log.action.includes('FAILED') ? 'destructive' : 
+             log.action.includes('CREATED') ? 'success' : 'default',
+  }));
+
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Studio Dashboard</h1>
+        <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
+          Studio Dashboard
+        </h1>
         <p className="text-muted-foreground italic">Vista global del ecosistema Maatwork.</p>
       </div>
       
@@ -103,34 +143,33 @@ export default async function StudioHomePage() {
       </Suspense>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <RecentActivity 
-          items={mockStudioActivity} 
-          className="col-span-4"
-        />
-        <Card className="col-span-3">
-          <CardHeader>
-            <CardTitle>Estado del Sistema</CardTitle>
-            <CardDescription>Monitoreo en tiempo real de servicios core.</CardDescription>
+        <TodoList initialTodos={todos} />
+        <Card className="col-span-3 border-white/5 bg-black/40 backdrop-blur-3xl overflow-hidden group">
+          <CardHeader className="border-b border-white/5 bg-white/[0.01]">
+            <CardTitle className="text-xl font-bold bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
+              Estado del Sistema
+            </CardTitle>
+            <CardDescription className="text-white/40">Monitoreo en tiempo real de servicios core.</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 p-3 rounded-xl bg-green-500/5 border border-green-500/10">
                 <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                <div className="text-sm font-medium">Todos los servicios operativos</div>
+                <div className="text-sm font-medium text-green-500/80">Todos los servicios operativos</div>
               </div>
-              <div className="grid grid-cols-2 gap-4 pt-4 border-t">
+              <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/5">
                 <div className="space-y-1">
-                  <div className="text-xs text-muted-foreground uppercase font-bold tracking-tighter">API Latency</div>
-                  <div className="text-lg font-mono">24ms</div>
+                  <div className="text-[10px] text-white/30 uppercase font-black tracking-[0.2em]">API Latency</div>
+                  <div className="text-lg font-mono text-white/90">24ms</div>
                 </div>
                 <div className="space-y-1">
-                  <div className="text-xs text-muted-foreground uppercase font-bold tracking-tighter">DB Load</div>
-                  <div className="text-lg font-mono">12%</div>
+                  <div className="text-[10px] text-white/30 uppercase font-black tracking-[0.2em]">DB Load</div>
+                  <div className="text-lg font-mono text-white/90">12%</div>
                 </div>
               </div>
-              <div className="pt-4 border-t">
-                <div className="text-xs text-muted-foreground mb-2 italic">Próximo despliegue programado:</div>
-                <div className="flex items-center gap-2 text-sm">
+              <div className="pt-4 border-t border-white/5">
+                <div className="text-[10px] text-white/30 mb-2 italic uppercase font-black tracking-widest">Próximo despliegue programado:</div>
+                <div className="flex items-center gap-2 text-sm text-white/60">
                   <Clock className="h-3 w-3" />
                   <span>Mañana, 04:00 AM (v1.1.0)</span>
                 </div>
@@ -139,41 +178,15 @@ export default async function StudioHomePage() {
           </CardContent>
         </Card>
       </div>
+
+      <div className="grid gap-4">
+        <RecentActivity 
+          items={activityItems} 
+          className="bg-black/40 backdrop-blur-3xl border-white/5"
+        />
+      </div>
     </div>
   );
 }
 
-const mockStudioActivity: ActivityItem[] = [
-  {
-    id: "1",
-    title: "Nuevo Tenant: Natatorio Splasher",
-    description: "Se ha activado una nueva suscripción 'Starter' para el tenant splasher-gym.",
-    timestamp: "Hace 15 minutos",
-    icon: Building2,
-    variant: "success",
-  },
-  {
-    id: "2",
-    title: "Actualización de Seguridad",
-    description: "Parche de middleware v1.0.1 aplicado a todas las apps del monorepo.",
-    timestamp: "Hace 2 horas",
-    icon: CheckCircle2,
-    variant: "default",
-  },
-  {
-    id: "3",
-    title: "Pago Fallido Detectado",
-    description: "Error en procesamiento de cobro para 'Peluquería Glam'.",
-    timestamp: "Hace 4 horas",
-    icon: AlertCircle,
-    variant: "destructive",
-  },
-  {
-    id: "4",
-    title: "Nuevo Registro de Usuario",
-    description: "Federico L. se ha unido como administrador de Studio.",
-    timestamp: "Ayer",
-    icon: UserPlus,
-    variant: "default",
-  },
-];
+

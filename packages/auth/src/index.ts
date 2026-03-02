@@ -28,11 +28,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
       async authorize(credentials) {
         // Demostration simple login override for the founders.
-        if (credentials?.email === "gio@maatwork.com" || credentials?.email === "tomi@maatwork.com") {
+        if (credentials?.email === "gio@maat.work" || credentials?.email === "tomi@maat.work") {
           return { 
-            id: credentials.email === "gio@maatwork.com" ? "founder-1" : "founder-2", 
+            id: credentials.email === "gio@maat.work" ? "founder-1" : "founder-2", 
             email: credentials.email as string, 
-            name: credentials.email === "gio@maatwork.com" ? "Gio" : "Tomi", 
+            name: credentials.email === "gio@maat.work" ? "Gio" : "Tomi", 
             role: "founder", 
             tenantId: "maatwork-hq" 
           };
