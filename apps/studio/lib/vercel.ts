@@ -4,20 +4,20 @@ export interface VercelProjectMeta {
   updatedAt: number;
 }
 
+const VERCEL_TOKEN = process.env.VERCEL_TOKEN;
+const VERCEL_TEAM_ID = process.env.VERCEL_TEAM_ID;
+
 export async function getVercelProjectMeta(projectId: string): Promise<VercelProjectMeta | null> {
-  const token = process.env.VERCEL_TOKEN;
-  const teamId = process.env.VERCEL_TEAM_ID;
-  
-  if (!token) return null;
+  if (!VERCEL_TOKEN) return null;
 
   try {
-    const url = teamId 
-      ? `https://api.vercel.com/v9/projects/${projectId}?teamId=${teamId}`
+    const url = VERCEL_TEAM_ID
+      ? `https://api.vercel.com/v9/projects/${projectId}?teamId=${VERCEL_TEAM_ID}`
       : `https://api.vercel.com/v9/projects/${projectId}`;
 
     const res = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${VERCEL_TOKEN}`,
       },
       next: { revalidate: 60 }, // Cache for 1 minute
     });
@@ -27,9 +27,9 @@ export async function getVercelProjectMeta(projectId: string): Promise<VercelPro
     const data = await res.json();
     
     // Get latest deployment
-    const deployRes = await fetch(`https://api.vercel.com/v6/deployments?projectId=${projectId}${teamId ? `&teamId=${teamId}` : ""}&limit=1`, {
+    const deployRes = await fetch(`https://api.vercel.com/v6/deployments?projectId=${projectId}${VERCEL_TEAM_ID ? `&teamId=${VERCEL_TEAM_ID}` : ""}&limit=1`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${VERCEL_TOKEN}`,
       },
     });
 
@@ -53,4 +53,109 @@ export async function getVercelProjectMeta(projectId: string): Promise<VercelPro
     console.error("Error fetching Vercel meta:", error);
     return null;
   }
+}
+
+export async function createVercelProject(name: string, githubRepo: string, framework: string = "nextjs"): Promise<{ id: string; url: string } | null> {
+  if (!VERCEL_TOKEN) {
+    console.error("VERCEL_TOKEN not configured");
+    return null;
+  }
+
+  try {
+    const [githubOwner, githubRepoName] = githubRepo.split("/");
+
+    const url = VERCEL_TEAM_ID
+      ? `https://api.vercel.com/v9/projects?teamId=${VERCEL_TEAM_ID}`
+      : `https://api.vercel.com/v9/projects`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${VERCEL_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        framework,
+        gitRepository: {
+          type: "github",
+          repo: githubRepo,
+        },
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Error creating Vercel project:", errorData);
+      return null;
+    }
+
+    const data = await response.json();
+    return {
+      id: data.id,
+      url: `https://${data.name}.vercel.app`,
+    };
+  } catch (error) {
+    console.error("Exception creating Vercel project:", error);
+    return null;
+  }
+}
+
+export async function setVercelEnvVar(projectId: string, key: string, value: string): Promise<boolean> {
+  if (!VERCEL_TOKEN) return false;
+
+  try {
+    const url = VERCEL_TEAM_ID
+      ? `https://api.vercel.com/v10/projects/${projectId}/env?teamId=${VERCEL_TEAM_ID}`
+      : `https://api.vercel.com/v10/projects/${projectId}/env`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${VERCEL_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        key,
+        value,
+        type: "secret",
+        target: ["production", "preview", "development"],
+      }),
+    });
+
+    return response.ok;
+  } catch (error) {
+    console.error("Error setting Vercel env var:", error);
+    return false;
+  }
+}
+
+/**
+ * Triggers a new deployment for a Vercel project.
+ */
+export async function triggerVercelDeployment(projectId: string): Promise<string | null> {
+    if (!VERCEL_TOKEN) return null;
+    try {
+        const url = VERCEL_TEAM_ID
+          ? `https://api.vercel.com/v13/deployments?teamId=${VERCEL_TEAM_ID}`
+          : `https://api.vercel.com/v13/deployments`;
+
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${VERCEL_TOKEN}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: "manual-sync-deployment",
+                projectId,
+            }),
+        });
+
+        if (!response.ok) return null;
+        const data = await response.json();
+        return data.id;
+    } catch (error) {
+        return null;
+    }
 }

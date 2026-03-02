@@ -114,14 +114,26 @@ export default async function AppsPage() {
                             <div className="h-6 w-6 rounded-lg border border-dashed border-white/5 opacity-20" />
                         )}
                         {t.vercelUrl ? (
-                            <a href={t.vercelUrl.startsWith('http') ? t.vercelUrl : `https://${t.vercelUrl}`} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-lg bg-white/[0.03] border border-white/5 text-white/40 hover:text-white hover:border-white/20 transition-all">
+                            <a
+                                href={t.slug ? `https://vercel.com/giolivo/${t.slug.startsWith('maat-') ? t.slug : `maat-${t.slug}`}` : t.vercelUrl}
+                                title="Vercel Dashboard"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-1.5 rounded-lg bg-white/[0.03] border border-white/5 text-white/40 hover:text-white hover:border-white/20 transition-all"
+                            >
                                 <ExternalLink className="h-3.5 w-3.5" />
                             </a>
                         ) : (
                             <div className="h-6 w-6 rounded-lg border border-dashed border-white/5 opacity-20" />
                         )}
                         {t.neonUrl ? (
-                            <a href={t.neonUrl} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-lg bg-white/[0.03] border border-white/5 text-white/40 hover:text-white hover:border-white/20 transition-all">
+                            <a
+                                href="https://console.neon.tech/app/projects"
+                                title="Neon Console"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-1.5 rounded-lg bg-white/[0.03] border border-white/5 text-white/40 hover:text-white hover:border-white/20 transition-all"
+                            >
                                 <Database className="h-3.5 w-3.5" />
                             </a>
                         ) : (

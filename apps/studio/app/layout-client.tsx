@@ -13,6 +13,7 @@ import {
   Users, 
   GitMerge, 
   Receipt,
+  Building2,
   ArrowLeftRight,
   ShieldAlert,
   BarChart3
@@ -27,7 +28,9 @@ interface App {
 const studioNav: NavItem[] = [
   { title: "Dashboard", href: "/", icon: LayoutDashboard },
   { title: "Pipeline", href: "/pipeline", icon: GitMerge },
-  { title: "Apps", href: "/apps", icon: Users },
+  { title: "Apps", href: "/apps", icon: Building2 },
+  { title: "Templates", href: "/templates", icon: LayoutDashboard },
+  { title: "Clientes", href: "/clients", icon: Users },
   { title: "Facturación", href: "/billing", icon: Receipt },
   { title: "Auditoría", href: "/audit", icon: ShieldAlert },
   { title: "Analytics", href: "/analytics", icon: BarChart3 }, // Added Analytics item

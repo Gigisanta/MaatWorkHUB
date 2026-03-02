@@ -21,13 +21,15 @@ import {
   Mail as MailIcon,
   Users,
   Settings,
-  X
+  X,
+  Rocket
 } from "lucide-react";
 import { Badge } from "@maatwork/ui";
 import { Button } from "@maatwork/ui";
 import { addLeadActivity } from "../lead-actions";
 import { toast } from "sonner";
 import { ActivityLogger } from "./activity-logger";
+import Link from "next/link";
 
 interface LeadDetailSheetProps {
   lead: Lead | null;
@@ -103,6 +105,23 @@ export function LeadDetailSheet({ lead, isOpen, onClose, onRefresh }: LeadDetail
               </div>
             </div>
           </div>
+
+          {lead.status === 'won' && (
+            <div className="p-6 rounded-2xl bg-primary/10 border border-primary/20 flex flex-col items-center text-center gap-4">
+              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                <Rocket className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h4 className="font-bold text-lg">¡Oportunidad Ganada!</h4>
+                <p className="text-sm text-white/60">Este lead está listo para ser convertido en una aplicación activa.</p>
+              </div>
+              <Link href={`/apps/new?name=${encodeURIComponent(lead.name)}&slug=${encodeURIComponent(lead.company?.toLowerCase().replace(/[^a-z0-9]/g, '-') || '')}`}>
+                <Button className="bg-primary hover:bg-primary/90 text-white font-bold px-8">
+                  Provisionar Aplicación
+                </Button>
+              </Link>
+            </div>
+          )}
 
           {/* Activity Section */}
           <div className="space-y-4">
