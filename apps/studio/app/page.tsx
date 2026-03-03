@@ -18,6 +18,7 @@ import {
   Zap, 
   CheckCircle2, 
   AlertCircle, 
+  TrendingUp,
   UserPlus,
   Clock,
   Github,

@@ -1,0 +1,71 @@
+# Development files
+.env
+.env.local
+.env*.local
+
+# Testing
+coverage/
+test-results/
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts (Vercel handles .next, but exclude others)
+dist/
+build/
+out/
+
+# Git
+.git/
+.gitignore
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Playwright
+playwright.config.ts
+.e2e/
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Misc scripts not needed in production
+scripts/*.ts
+scripts/*.js
+
+# Config files not needed for deploy
+.prettierrc
+.prettierignore
+.eslintrc
+.eslintrc.js
+.eslintrc.json
+
+# Package manager locks (Vercel uses pnpm-lock.yaml)
+yarn.lock
+package-lock.json
+
+# Husky
+.husky/
+
+# Development configs
+next.config.mjs.bak
