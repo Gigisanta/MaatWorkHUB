@@ -19,6 +19,7 @@ import {
   CheckCircle2, 
   AlertCircle, 
   UserPlus,
+  TrendingUp,
   Clock,
   Github,
   ExternalLink
