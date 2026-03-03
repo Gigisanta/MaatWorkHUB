@@ -8,6 +8,4 @@ const nextConfig = {
   transpilePackages: ["@maatwork/ui", "@maatwork/database", "@maatwork/auth", "@maatwork/infra"],
 };
 
-export default nextConfig;
 
-export default nextConfig;
