@@ -22,7 +22,8 @@ import {
   UserPlus,
   Clock,
   Github,
-  ExternalLink
+  ExternalLink,
+  TrendingUp
 } from "lucide-react";
 
 async function StudioKPIs() {
