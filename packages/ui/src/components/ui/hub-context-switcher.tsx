@@ -1,13 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
   SelectValue,
-  Separator
+  Separator,
 } from "@maatwork/ui";
 import { Building2, Globe, LayoutDashboard } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
@@ -23,7 +23,10 @@ interface HubContextSwitcherProps {
   currentApp?: string;
 }
 
-export function HubContextSwitcher({ apps, currentApp }: HubContextSwitcherProps) {
+export function HubContextSwitcher({
+  apps,
+  currentApp,
+}: HubContextSwitcherProps) {
   const [mounted, setMounted] = React.useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -63,8 +66,8 @@ export function HubContextSwitcher({ apps, currentApp }: HubContextSwitcherProps
           Contexto del Hub
         </span>
       </div>
-      <Select 
-        defaultValue={pathname.split('/')[1] || currentApp || "global"} 
+      <Select
+        defaultValue={pathname.split("/")[1] || currentApp || "global"}
         onValueChange={handleValueChange}
       >
         <SelectTrigger className="w-full bg-background/50 border-muted-foreground/20 hover:bg-accent transition-colors">

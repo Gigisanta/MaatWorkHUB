@@ -10,7 +10,7 @@ declare module "next-auth" {
       name?: string | null;
       role: string;
       appId: string;
-    }
+    };
   }
   interface User {
     role?: string;
@@ -24,29 +24,33 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Credentials({
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         // Demostration simple login override for the founders.
-        if (credentials?.email === "gio@maat.work" || credentials?.email === "tomi@maat.work") {
-          return { 
-            id: credentials.email === "gio@maat.work" ? "founder-1" : "founder-2", 
-            email: credentials.email as string, 
-            name: credentials.email === "gio@maat.work" ? "Gio" : "Tomi", 
-            role: "founder", 
-            appId: "maatwork-hq" 
+        if (
+          credentials?.email === "gio@maat.work" ||
+          credentials?.email === "tomi@maat.work"
+        ) {
+          return {
+            id:
+              credentials.email === "gio@maat.work" ? "founder-1" : "founder-2",
+            email: credentials.email as string,
+            name: credentials.email === "gio@maat.work" ? "Gio" : "Tomi",
+            role: "founder",
+            appId: "maatwork-hq",
           };
         }
-        
+
         // Mock default user
         return {
           id: "demo-user",
           email: credentials?.email as string,
           name: "Demo User",
           role: "admin",
-          appId: "demo-natatorio"
+          appId: "demo-natatorio",
         };
-      }
+      },
     }),
   ],
   callbacks: {
@@ -63,6 +67,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.appId = token.appId as string;
       }
       return session;
-    }
-  }
+    },
+  },
 });

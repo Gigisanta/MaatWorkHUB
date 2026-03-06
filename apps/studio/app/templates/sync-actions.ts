@@ -3,7 +3,11 @@
 import { db } from "@maatwork/database";
 import { apps, templates, activity_logs } from "@maatwork/database/schema";
 import { eq, and, ne } from "drizzle-orm";
-import { compareCommits, createPullRequest, getGitHubRepoMeta } from "@maatwork/infra";
+import {
+  compareCommits,
+  createPullRequest,
+  getGitHubRepoMeta,
+} from "@maatwork/infra";
 import { revalidatePath } from "next/cache";
 
 /**
@@ -15,7 +19,7 @@ export async function checkAppSyncStatus(appId: string) {
   });
 
   if (!app || !app.githubRepo || !app.templateCommitSha) {
-    return { status: 'unknown' };
+    return { status: "unknown" };
   }
 
   // Get the template's current repo
@@ -23,24 +27,29 @@ export async function checkAppSyncStatus(appId: string) {
     where: eq(templates.id, app.template),
   });
 
-  if (!template) return { status: 'no_template' };
+  if (!template) return { status: "no_template" };
 
   // Get latest commit from template
   const templateMeta = await getGitHubRepoMeta(template.githubRepo);
-  if (!templateMeta || !templateMeta.lastCommitSha) return { status: 'fetch_error' };
+  if (!templateMeta || !templateMeta.lastCommitSha)
+    return { status: "fetch_error" };
 
   if (templateMeta.lastCommitSha === app.templateCommitSha) {
-    return { status: 'synced', latestSha: templateMeta.lastCommitSha };
+    return { status: "synced", latestSha: templateMeta.lastCommitSha };
   }
 
   // Compare
-  const comparison = await compareCommits(template.githubRepo, app.templateCommitSha, templateMeta.lastCommitSha);
+  const comparison = await compareCommits(
+    template.githubRepo,
+    app.templateCommitSha,
+    templateMeta.lastCommitSha,
+  );
 
   return {
-    status: comparison?.behind_by ? 'out_of_sync' : 'synced',
+    status: comparison?.behind_by ? "out_of_sync" : "synced",
     behindBy: comparison?.behind_by || 0,
     latestSha: templateMeta.lastCommitSha,
-    currentSha: app.templateCommitSha
+    currentSha: app.templateCommitSha,
   };
 }
 
@@ -52,16 +61,18 @@ export async function syncAppWithTemplate(appId: string) {
     where: eq(apps.id, appId),
   });
 
-  if (!app || !app.githubRepo || !app.template) return { success: false, error: 'App or Repo not found' };
+  if (!app || !app.githubRepo || !app.template)
+    return { success: false, error: "App or Repo not found" };
 
   const template = await db.query.templates.findFirst({
     where: eq(templates.id, app.template),
   });
 
-  if (!template) return { success: false, error: 'Template not found' };
+  if (!template) return { success: false, error: "Template not found" };
 
   const templateMeta = await getGitHubRepoMeta(template.githubRepo);
-  if (!templateMeta || !templateMeta.lastCommitSha) return { success: false, error: 'Could not fetch template meta' };
+  if (!templateMeta || !templateMeta.lastCommitSha)
+    return { success: false, error: "Could not fetch template meta" };
 
   // Logic: Create a PR from template:main to app:main
   // Note: GitHub API 'generate' doesn't keep a git history link,
@@ -69,14 +80,15 @@ export async function syncAppWithTemplate(appId: string) {
   // Standard way: Create a PR with the changes.
 
   const protectedPaths = (template.protectedPaths as string[]) || [];
-  const protectedPathsList = protectedPaths.length > 0
-    ? `\n\n⚠️ **Rutas Protegidas Detectadas:**\n${protectedPaths.map(p => `- ${p}`).join('\n')}\nPor favor, revisa manualmente los archivos en estas rutas para no sobrescribir personalizaciones de marca del cliente.`
-    : '';
+  const protectedPathsList =
+    protectedPaths.length > 0
+      ? `\n\n⚠️ **Rutas Protegidas Detectadas:**\n${protectedPaths.map((p) => `- ${p}`).join("\n")}\nPor favor, revisa manualmente los archivos en estas rutas para no sobrescribir personalizaciones de marca del cliente.`
+      : "";
 
   const prUrl = await createPullRequest(
     app.githubRepo,
     `🚀 Maatwork Hub: Sync Core [${template.name}]`,
-    `${template.githubRepo.split('/')[0]}:main`,
+    `${template.githubRepo.split("/")[0]}:main`,
     "main",
     `Esta es una actualización automática desde el **Maatwork Hub** para sincronizar la aplicación con su núcleo original.
 
@@ -86,12 +98,13 @@ export async function syncAppWithTemplate(appId: string) {
 - Nuevas funcionalidades de la plantilla core [${template.id}]
 ${protectedPathsList}
 
-*Generado automáticamente por Maatwork Studio.*`
+*Generado automáticamente por Maatwork Studio.*`,
   );
 
   if (prUrl) {
     // Update last sync attempt
-    await db.update(apps)
+    await db
+      .update(apps)
       .set({
         lastSyncAt: new Date(),
         // We don't update templateCommitSha until the PR is merged,
@@ -103,5 +116,8 @@ ${protectedPathsList}
     return { success: true, prUrl };
   }
 
-  return { success: false, error: 'Error al crear el Pull Request. Revisa permisos.' };
+  return {
+    success: false,
+    error: "Error al crear el Pull Request. Revisa permisos.",
+  };
 }

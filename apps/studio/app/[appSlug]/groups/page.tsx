@@ -1,41 +1,44 @@
 import { db } from "@maatwork/database";
 import { groups, apps } from "@maatwork/database/schema";
 import { eq } from "drizzle-orm";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow, 
-  Button, 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Button,
   TableSkeleton,
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-  Badge
+  Badge,
 } from "@maatwork/ui";
 import { Suspense } from "react";
-import { 
-  Users, 
-  Plus, 
-  Calendar, 
-  Clock, 
-  User, 
+import {
+  Users,
+  Plus,
+  Calendar,
+  Clock,
+  User,
   Users2,
   ChevronRight,
   Filter,
-  Search
+  Search,
 } from "lucide-react";
 
 async function GroupsList({ appId }: { appId: string }) {
-  const allGroups = await db.select({
-    id: groups.id,
-    name: groups.name,
-    schedule: groups.schedule,
-  }).from(groups).where(eq(groups.appId, appId));
+  const allGroups = await db
+    .select({
+      id: groups.id,
+      name: groups.name,
+      schedule: groups.schedule,
+    })
+    .from(groups)
+    .where(eq(groups.appId, appId));
 
   if (allGroups.length === 0) {
     return (
@@ -46,7 +49,10 @@ async function GroupsList({ appId }: { appId: string }) {
           </div>
           <div className="space-y-1">
             <h3 className="text-xl font-semibold">No hay grupos creados</h3>
-            <p className="text-muted-foreground max-w-sm">Crea grupos para organizar tus clases, turnos o sesiones de entrenamiento.</p>
+            <p className="text-muted-foreground max-w-sm">
+              Crea grupos para organizar tus clases, turnos o sesiones de
+              entrenamiento.
+            </p>
           </div>
           <Button className="gap-2">
             <Plus className="h-4 w-4" />
@@ -71,7 +77,10 @@ async function GroupsList({ appId }: { appId: string }) {
         </TableHeader>
         <TableBody>
           {allGroups.map((g) => (
-            <TableRow key={g.id} className="hover:bg-muted/30 transition-colors">
+            <TableRow
+              key={g.id}
+              className="hover:bg-muted/30 transition-colors"
+            >
               <TableCell className="font-semibold">{g.name}</TableCell>
               <TableCell>
                 <div className="flex items-center gap-2 text-sm">
@@ -80,9 +89,12 @@ async function GroupsList({ appId }: { appId: string }) {
                 </div>
               </TableCell>
               <TableCell>
-                <Badge variant="outline" className="font-mono text-[10px] gap-1.5 uppercase">
+                <Badge
+                  variant="outline"
+                  className="font-mono text-[10px] gap-1.5 uppercase"
+                >
                   <Clock className="h-3 w-3" />
-                  {typeof g.schedule === 'string' ? g.schedule : 'Sin horario'}
+                  {typeof g.schedule === "string" ? g.schedule : "Sin horario"}
                 </Badge>
               </TableCell>
               <TableCell>
@@ -107,9 +119,13 @@ async function GroupsList({ appId }: { appId: string }) {
   );
 }
 
-export default async function GroupsPage({ params }: { params: Promise<{ appSlug: string }> }) {
+export default async function GroupsPage({
+  params,
+}: {
+  params: Promise<{ appSlug: string }>;
+}) {
   const { appSlug } = await params;
-  
+
   const appRecord = await db.query.apps.findFirst({
     where: eq(apps.slug, appSlug),
   });
@@ -120,8 +136,12 @@ export default async function GroupsPage({ params }: { params: Promise<{ appSlug
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight uppercase">Grupos y Clases</h1>
-          <p className="text-muted-foreground italic">Organiza tus sesiones, cupos y horarios de entrenamiento.</p>
+          <h1 className="text-3xl font-bold tracking-tight uppercase">
+            Grupos y Clases
+          </h1>
+          <p className="text-muted-foreground italic">
+            Organiza tus sesiones, cupos y horarios de entrenamiento.
+          </p>
         </div>
         <Button className="gap-2">
           <Plus className="h-4 w-4" />
@@ -168,9 +188,9 @@ export default async function GroupsPage({ params }: { params: Promise<{ appSlug
       <div className="flex items-center gap-2 bg-muted/30 p-2 rounded-lg border">
         <div className="relative flex-1">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <input 
-            type="search" 
-            placeholder="Buscar por nombre de grupo..." 
+          <input
+            type="search"
+            placeholder="Buscar por nombre de grupo..."
             className="w-full bg-transparent pl-9 pr-4 py-2 text-sm focus:outline-none"
           />
         </div>

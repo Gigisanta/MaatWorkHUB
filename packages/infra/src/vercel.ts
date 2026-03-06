@@ -9,7 +9,9 @@ const getTokens = () => ({
   VERCEL_TEAM_ID: process.env.VERCEL_TEAM_ID,
 });
 
-export async function getVercelProjectMeta(projectId: string): Promise<VercelProjectMeta | null> {
+export async function getVercelProjectMeta(
+  projectId: string,
+): Promise<VercelProjectMeta | null> {
   const { VERCEL_TOKEN, VERCEL_TEAM_ID } = getTokens();
   if (!VERCEL_TOKEN) return null;
 
@@ -30,11 +32,14 @@ export async function getVercelProjectMeta(projectId: string): Promise<VercelPro
     const data = await res.json();
 
     // Get latest deployment
-    const deployRes = await fetch(`https://api.vercel.com/v6/deployments?projectId=${projectId}${VERCEL_TEAM_ID ? `&teamId=${VERCEL_TEAM_ID}` : ""}&limit=1`, {
-      headers: {
-        Authorization: `Bearer ${VERCEL_TOKEN}`,
+    const deployRes = await fetch(
+      `https://api.vercel.com/v6/deployments?projectId=${projectId}${VERCEL_TEAM_ID ? `&teamId=${VERCEL_TEAM_ID}` : ""}&limit=1`,
+      {
+        headers: {
+          Authorization: `Bearer ${VERCEL_TOKEN}`,
+        },
       },
-    });
+    );
 
     let status: VercelProjectMeta["status"] = "READY";
     let prodUrl = data.targets?.production?.url || data.link?.url || "";
@@ -58,7 +63,11 @@ export async function getVercelProjectMeta(projectId: string): Promise<VercelPro
   }
 }
 
-export async function createVercelProject(name: string, githubRepo: string, framework: string = "nextjs"): Promise<{ id: string; url: string } | null> {
+export async function createVercelProject(
+  name: string,
+  githubRepo: string,
+  framework: string = "nextjs",
+): Promise<{ id: string; url: string } | null> {
   const { VERCEL_TOKEN, VERCEL_TEAM_ID } = getTokens();
   if (!VERCEL_TOKEN) {
     console.error("VERCEL_TOKEN not configured");
@@ -105,7 +114,11 @@ export async function createVercelProject(name: string, githubRepo: string, fram
   }
 }
 
-export async function setVercelEnvVar(projectId: string, key: string, value: string): Promise<boolean> {
+export async function setVercelEnvVar(
+  projectId: string,
+  key: string,
+  value: string,
+): Promise<boolean> {
   const { VERCEL_TOKEN, VERCEL_TEAM_ID } = getTokens();
   if (!VERCEL_TOKEN) return false;
 
@@ -138,30 +151,32 @@ export async function setVercelEnvVar(projectId: string, key: string, value: str
 /**
  * Triggers a new deployment for a Vercel project.
  */
-export async function triggerVercelDeployment(projectId: string): Promise<string | null> {
-    const { VERCEL_TOKEN, VERCEL_TEAM_ID } = getTokens();
-    if (!VERCEL_TOKEN) return null;
-    try {
-        const url = VERCEL_TEAM_ID
-          ? `https://api.vercel.com/v13/deployments?teamId=${VERCEL_TEAM_ID}`
-          : `https://api.vercel.com/v13/deployments`;
+export async function triggerVercelDeployment(
+  projectId: string,
+): Promise<string | null> {
+  const { VERCEL_TOKEN, VERCEL_TEAM_ID } = getTokens();
+  if (!VERCEL_TOKEN) return null;
+  try {
+    const url = VERCEL_TEAM_ID
+      ? `https://api.vercel.com/v13/deployments?teamId=${VERCEL_TEAM_ID}`
+      : `https://api.vercel.com/v13/deployments`;
 
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${VERCEL_TOKEN}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: "manual-sync-deployment",
-                projectId,
-            }),
-        });
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${VERCEL_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "manual-sync-deployment",
+        projectId,
+      }),
+    });
 
-        if (!response.ok) return null;
-        const data = await response.json();
-        return data.id;
-    } catch (error) {
-        return null;
-    }
+    if (!response.ok) return null;
+    const data = await response.json();
+    return data.id;
+  } catch (error) {
+    return null;
+  }
 }

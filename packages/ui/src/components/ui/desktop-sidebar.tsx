@@ -21,9 +21,7 @@ export function DesktopSidebar({ items, title, footer }: DesktopSidebarProps) {
         <NavMain items={items} />
       </div>
       {footer && (
-        <div className="p-4 border-t border-muted-foreground/10">
-          {footer}
-        </div>
+        <div className="p-4 border-t border-muted-foreground/10">{footer}</div>
       )}
     </aside>
   );

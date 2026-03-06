@@ -18,20 +18,14 @@ const studioNav: NavItem[] = [
   { title: "Billing", href: "/billing", icon: Receipt },
 ];
 
-export default function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="dark">
       <body className="antialiased font-sans flex flex-col md:flex-row min-h-screen selection:bg-primary selection:text-primary-foreground bg-background text-foreground">
         <MobileNav items={studioNav} title="Maatwork HQ" />
         <DesktopSidebar items={studioNav} title="Maatwork HQ" />
-        
-        <main className="flex-1 p-4 md:p-8 overflow-y-auto">
-          {children}
-        </main>
+
+        <main className="flex-1 p-4 md:p-8 overflow-y-auto">{children}</main>
       </body>
     </html>
   );

@@ -14,11 +14,13 @@ export default async function PipelinePage() {
           <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
             Sales Pipeline
           </h1>
-          <p className="text-muted-foreground italic text-sm">Gestiona leads y oportunidades de crecimiento.</p>
+          <p className="text-muted-foreground italic text-sm">
+            Gestiona leads y oportunidades de crecimiento.
+          </p>
         </div>
         <LeadExportButton />
       </div>
-      
+
       <Suspense fallback={<PipelineSkeleton />}>
         <KanbanBoard initialLeads={initialLeads as any} />
       </Suspense>

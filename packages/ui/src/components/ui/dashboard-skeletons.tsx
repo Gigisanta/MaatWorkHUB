@@ -26,7 +26,10 @@ export function TableSkeleton({ rows = 5 }: { rows?: number }) {
           <Skeleton className="h-4 w-full" />
         </div>
         {Array.from({ length: rows }).map((_, i) => (
-          <div key={i} className="h-12 border-b flex items-center px-4 last:border-0">
+          <div
+            key={i}
+            className="h-12 border-b flex items-center px-4 last:border-0"
+          >
             <Skeleton className="h-4 w-full" />
           </div>
         ))}

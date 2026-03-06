@@ -4,7 +4,9 @@ export interface NeonProject {
   connection_uri: string;
 }
 
-export async function createNeonProject(name: string): Promise<NeonProject | null> {
+export async function createNeonProject(
+  name: string,
+): Promise<NeonProject | null> {
   const apiKey = process.env.NEON_API_KEY;
   if (!apiKey) {
     console.error("NEON_API_KEY is not configured");
@@ -15,15 +17,15 @@ export async function createNeonProject(name: string): Promise<NeonProject | nul
     const response = await fetch("https://console.neon.tech/api/v2/projects", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         project: {
           name,
           region_id: "aws-us-east-2", // Default region
-        }
+        },
       }),
     });
 
@@ -54,12 +56,15 @@ export async function deleteNeonProject(projectId: string): Promise<boolean> {
   if (!apiKey) return false;
 
   try {
-    const response = await fetch(`https://console.neon.tech/api/v2/projects/${projectId}`, {
-      method: "DELETE",
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
+    const response = await fetch(
+      `https://console.neon.tech/api/v2/projects/${projectId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
       },
-    });
+    );
 
     return response.ok;
   } catch (error) {

@@ -10,7 +10,7 @@ import { Search, Filter, Kanban as KanbanIcon } from "lucide-react";
 
 export interface Activity {
   id: string;
-  type: 'call' | 'email' | 'meeting' | 'note' | 'task' | 'system';
+  type: "call" | "email" | "meeting" | "note" | "task" | "system";
   content: string;
   createdAt: Date;
 }
@@ -53,22 +53,26 @@ export function KanbanBoard({ initialLeads }: { initialLeads: Lead[] }) {
   const handleDrop = async (e: React.DragEvent, stageId: string) => {
     e.preventDefault();
     const id = e.dataTransfer.getData("text/plain");
-    
+
     if (id) {
-      const leadToUpdate = leads.find(l => l.id === id);
+      const leadToUpdate = leads.find((l) => l.id === id);
       if (leadToUpdate?.status === stageId) return;
 
       // Optimistic update
       const prevLeads = [...leads];
-      setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status: stageId as any } : l)));
-      
+      setLeads((prev) =>
+        prev.map((l) => (l.id === id ? { ...l, status: stageId as any } : l)),
+      );
+
       const result = await updateLeadStatus(id, stageId as any);
-      
+
       if (!result.success) {
         setLeads(prevLeads);
         toast.error("Error al actualizar estado del lead");
       } else {
-        toast.success(`Lead movido a ${STAGES.find(s => s.id === stageId)?.title}`);
+        toast.success(
+          `Lead movido a ${STAGES.find((s) => s.id === stageId)?.title}`,
+        );
         // Refresh lead details if open
         if (selectedLead?.id === id) {
           refreshSelectedLead(id);
@@ -89,14 +93,17 @@ export function KanbanBoard({ initialLeads }: { initialLeads: Lead[] }) {
     const fullLead = await getLeadById(id);
     if (fullLead) {
       setSelectedLead(fullLead as any);
-      setLeads(prev => prev.map(l => l.id === id ? (fullLead as any) : l));
+      setLeads((prev) =>
+        prev.map((l) => (l.id === id ? (fullLead as any) : l)),
+      );
     }
   };
 
-  const filteredLeads = leads.filter(lead => 
-    lead.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    (lead.company?.toLowerCase().includes(searchQuery.toLowerCase())) ||
-    (lead.email?.toLowerCase().includes(searchQuery.toLowerCase()))
+  const filteredLeads = leads.filter(
+    (lead) =>
+      lead.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      lead.company?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      lead.email?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
@@ -105,8 +112,8 @@ export function KanbanBoard({ initialLeads }: { initialLeads: Lead[] }) {
       <div className="flex gap-4 items-center bg-white/[0.03] p-2 rounded-2xl border border-white/5 backdrop-blur-md">
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20" />
-          <Input 
-            placeholder="Buscar leads..." 
+          <Input
+            placeholder="Buscar leads..."
             className="bg-black/20 border-white/5 pl-9 h-9 text-xs focus-visible:ring-primary/20"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -128,17 +135,19 @@ export function KanbanBoard({ initialLeads }: { initialLeads: Lead[] }) {
             onDrop={(e) => handleDrop(e, stage.id)}
           >
             <div className="flex items-center justify-between mb-2 px-2">
-              <h3 className="font-bold text-[10px] uppercase tracking-[0.2em] text-white/50">{stage.title}</h3>
+              <h3 className="font-bold text-[10px] uppercase tracking-[0.2em] text-white/50">
+                {stage.title}
+              </h3>
               <span className="text-[10px] px-2.5 py-1 rounded-full bg-white/5 text-white/40 font-mono border border-white/5">
-                {filteredLeads.filter(l => l.status === stage.id).length}
+                {filteredLeads.filter((l) => l.status === stage.id).length}
               </span>
             </div>
-            
+
             <div className="flex flex-col gap-3 overflow-y-auto pr-1 custom-scrollbar">
               {filteredLeads
                 .filter((l) => l.status === stage.id)
                 .map((lead) => (
-                  <KanbanCard 
+                  <KanbanCard
                     key={lead.id}
                     lead={lead}
                     onDragStart={handleDragStart}
@@ -146,10 +155,13 @@ export function KanbanBoard({ initialLeads }: { initialLeads: Lead[] }) {
                     onClick={handleCardClick}
                   />
                 ))}
-              
-              {filteredLeads.filter(l => l.status === stage.id).length === 0 && (
+
+              {filteredLeads.filter((l) => l.status === stage.id).length ===
+                0 && (
                 <div className="flex-1 flex flex-col items-center justify-center border border-dashed border-white/5 rounded-2xl py-12 opacity-30 select-none">
-                  <p className="text-[10px] italic font-light tracking-wide">Sin contactos en esta etapa</p>
+                  <p className="text-[10px] italic font-light tracking-wide">
+                    Sin contactos en esta etapa
+                  </p>
                 </div>
               )}
             </div>
@@ -157,7 +169,7 @@ export function KanbanBoard({ initialLeads }: { initialLeads: Lead[] }) {
         ))}
       </div>
 
-      <LeadDetailSheet 
+      <LeadDetailSheet
         lead={selectedLead}
         isOpen={isSheetOpen}
         onClose={() => setIsSheetOpen(false)}

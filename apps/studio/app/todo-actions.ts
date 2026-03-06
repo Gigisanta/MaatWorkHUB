@@ -9,7 +9,10 @@ export async function getTodos() {
   return await db.select().from(studio_todos).orderBy(studio_todos.createdAt);
 }
 
-export async function addTodo(text: string, priority: 'low' | 'medium' | 'high' = 'medium') {
+export async function addTodo(
+  text: string,
+  priority: "low" | "medium" | "high" = "medium",
+) {
   await db.insert(studio_todos).values({
     id: uuidv4(),
     text,
@@ -20,7 +23,8 @@ export async function addTodo(text: string, priority: 'low' | 'medium' | 'high' 
 }
 
 export async function toggleTodo(id: string, completed: boolean) {
-  await db.update(studio_todos)
+  await db
+    .update(studio_todos)
     .set({ completed })
     .where(eq(studio_todos.id, id));
   revalidatePath("/");

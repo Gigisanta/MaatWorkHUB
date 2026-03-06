@@ -5,8 +5,21 @@ import { createAppAction } from "../actions";
 import { Button } from "@maatwork/ui";
 import { Input } from "@maatwork/ui";
 import { Label } from "@maatwork/ui";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@maatwork/ui";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@maatwork/ui";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@maatwork/ui";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@maatwork/ui";
 import { useState } from "react";
 import Link from "next/link";
 import { useToast } from "@maatwork/ui";
@@ -14,7 +27,9 @@ import { useToast } from "@maatwork/ui";
 export default function CreateAppPage() {
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
-  const [template, setTemplate] = useState<"base" | "natatorio" | "peluqueria">("base");
+  const [template, setTemplate] = useState<"base" | "natatorio" | "peluqueria">(
+    "base",
+  );
   const { toast } = useToast();
 
   const { execute, isExecuting } = useAction(createAppAction, {
@@ -27,7 +42,9 @@ export default function CreateAppPage() {
     onError: ({ error }) => {
       toast({
         title: "Error Creating App",
-        description: error.serverError ? String(error.serverError) : "Validation or server error occurred.",
+        description: error.serverError
+          ? String(error.serverError)
+          : "Validation or server error occurred.",
         variant: "destructive",
       });
     },
@@ -59,7 +76,7 @@ export default function CreateAppPage() {
                 autoComplete="off"
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="slug">Subdomain (Slug)</Label>
               <div className="flex items-center space-x-2">
@@ -67,16 +84,27 @@ export default function CreateAppPage() {
                   id="slug"
                   placeholder="acme-corp"
                   value={slug}
-                  onChange={(e) => setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ""))}
+                  onChange={(e) =>
+                    setSlug(
+                      e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ""),
+                    )
+                  }
                   autoComplete="off"
                 />
-                <span className="text-muted-foreground whitespace-nowrap">.maat.work</span>
+                <span className="text-muted-foreground whitespace-nowrap">
+                  .maat.work
+                </span>
               </div>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="template">Template Selection</Label>
-              <Select value={template} onValueChange={(v: "base" | "natatorio" | "peluqueria") => setTemplate(v)}>
+              <Select
+                value={template}
+                onValueChange={(v: "base" | "natatorio" | "peluqueria") =>
+                  setTemplate(v)
+                }
+              >
                 <SelectTrigger id="template">
                   <SelectValue placeholder="Select a template" />
                 </SelectTrigger>
@@ -90,7 +118,9 @@ export default function CreateAppPage() {
           </CardContent>
           <CardFooter className="flex justify-between">
             <Link href="/apps">
-              <Button variant="outline" type="button" disabled={isExecuting}>Cancel</Button>
+              <Button variant="outline" type="button" disabled={isExecuting}>
+                Cancel
+              </Button>
             </Link>
             <Button type="submit" disabled={isExecuting}>
               {isExecuting ? "Provisioning..." : "Start Onboarding"}

@@ -1,6 +1,12 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@maatwork/ui";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@maatwork/ui";
 import { GlassCard } from "@maatwork/ui";
 import { Lead } from "./kanban-board";
 import { Calendar, Building, DollarSign, MessageSquare } from "lucide-react";
@@ -12,7 +18,12 @@ interface KanbanCardProps {
   onClick: (lead: Lead) => void;
 }
 
-export function KanbanCard({ lead, onDragStart, draggedLeadId, onClick }: KanbanCardProps) {
+export function KanbanCard({
+  lead,
+  onDragStart,
+  draggedLeadId,
+  onClick,
+}: KanbanCardProps) {
   const lastActivity = lead.activities?.[0];
 
   return (
@@ -54,12 +65,16 @@ export function KanbanCard({ lead, onDragStart, draggedLeadId, onClick }: Kanban
             </p>
           </div>
         )}
-        
+
         <div className="text-[9px] text-white/20 flex justify-between items-center mt-3 border-t border-white/5 pt-3 uppercase tracking-widest">
           <span className="font-mono">ID: {lead.id.slice(-4)}</span>
           <div className="flex items-center gap-1">
             <Calendar className="w-2.5 h-2.5" />
-            <span>{lead.createdAt ? new Date(lead.createdAt).toLocaleDateString() : 'N/A'}</span>
+            <span>
+              {lead.createdAt
+                ? new Date(lead.createdAt).toLocaleDateString()
+                : "N/A"}
+            </span>
           </div>
         </div>
       </CardContent>

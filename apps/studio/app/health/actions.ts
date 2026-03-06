@@ -8,5 +8,5 @@ export async function getSystemHealth() {
 }
 
 export async function refreshHealth() {
-    revalidatePath("/health");
+  revalidatePath("/health");
 }

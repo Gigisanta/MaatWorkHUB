@@ -11,18 +11,21 @@ interface AppStatusToggleProps {
   currentStatus: "active" | "past_due" | "canceled" | "trialing";
 }
 
-export function AppStatusToggle({ appId, currentStatus }: AppStatusToggleProps) {
+export function AppStatusToggle({
+  appId,
+  currentStatus,
+}: AppStatusToggleProps) {
   const { execute, status } = useAction(toggleAppStatusAction, {
     onSuccess: (data) => {
       toast.success(
-        data.data?.newStatus === "active" 
-          ? "Centro reanudado con éxito." 
-          : "Centro pausado correctamente."
+        data.data?.newStatus === "active"
+          ? "Centro reanudado con éxito."
+          : "Centro pausado correctamente.",
       );
     },
     onError: () => {
       toast.error("Error al cambiar el estado del centro.");
-    }
+    },
   });
 
   const isLoading = status === "executing";

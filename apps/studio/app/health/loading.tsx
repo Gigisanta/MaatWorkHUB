@@ -13,8 +13,13 @@ export default function HealthLoading() {
 
       <div className="grid gap-4 md:grid-cols-3">
         {[1, 2, 3].map((i) => (
-          <Card key={i} className="border-white/5 bg-black/40 backdrop-blur-3xl">
-            <CardHeader><Skeleton className="h-4 w-20" /></CardHeader>
+          <Card
+            key={i}
+            className="border-white/5 bg-black/40 backdrop-blur-3xl"
+          >
+            <CardHeader>
+              <Skeleton className="h-4 w-20" />
+            </CardHeader>
             <CardContent className="space-y-4">
               <Skeleton className="h-8 w-32" />
               <Skeleton className="h-4 w-full" />

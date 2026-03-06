@@ -5,7 +5,7 @@ import { v4 as uuid } from "uuid";
 interface TrackOptions {
   appId?: string;
   eventType: string; // e.g., 'mrr.update', 'feature.used'
-  source: 'studio' | 'app-app' | 'system';
+  source: "studio" | "app-app" | "system";
   value?: number;
   metadata?: Record<string, unknown>;
 }
@@ -19,7 +19,7 @@ export async function trackEvent({
   eventType,
   source,
   value,
-  metadata
+  metadata,
 }: TrackOptions) {
   try {
     // In a production scaling scenario, this would go to a queue (e.g. SQS/Redis)
@@ -42,15 +42,15 @@ export async function trackEvent({
  * Specialized helper for financial tracking
  */
 export async function trackFinancialEvent(
-  amount: number, 
-  type: 'subscription' | 'one-time',
-  appId?: string
+  amount: number,
+  type: "subscription" | "one-time",
+  appId?: string,
 ) {
   return trackEvent({
     appId,
-    eventType: 'mrr.update',
-    source: 'system',
+    eventType: "mrr.update",
+    source: "system",
     value: amount,
-    metadata: { type }
+    metadata: { type },
   });
 }

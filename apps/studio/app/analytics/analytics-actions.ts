@@ -12,19 +12,21 @@ export async function getFounderIntelligence() {
   // 1. Total MRR (Sum of latest mrr.update values)
   const mrrResult = await db
     .select({
-      total: sql<number>`COALESCE(SUM(value), 0)`
+      total: sql<number>`COALESCE(SUM(value), 0)`,
     })
     .from(analytics_events)
-    .where(and(
-      eq(analytics_events.eventType, 'mrr.update'),
-      gte(analytics_events.createdAt, thirtyDaysAgo)
-    ));
+    .where(
+      and(
+        eq(analytics_events.eventType, "mrr.update"),
+        gte(analytics_events.createdAt, thirtyDaysAgo),
+      ),
+    );
 
   // 2. Event Distribution (Engagement metrics)
   const eventStats = await db
     .select({
       type: analytics_events.eventType,
-      count: sql<number>`count(*)`
+      count: sql<number>`count(*)`,
     })
     .from(analytics_events)
     .groupBy(analytics_events.eventType)
@@ -53,7 +55,7 @@ export async function getEngagementHeatmap() {
   const heatmap = await db
     .select({
       appName: apps.name,
-      eventCount: sql<number>`count(${analytics_events.id})`
+      eventCount: sql<number>`count(${analytics_events.id})`,
     })
     .from(apps)
     .leftJoin(analytics_events, eq(apps.id, analytics_events.appId))

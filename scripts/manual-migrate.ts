@@ -1,12 +1,12 @@
-import { neon } from '@neondatabase/serverless';
-import * as dotenv from 'dotenv';
-import { resolve } from 'path';
+import { neon } from "@neondatabase/serverless";
+import * as dotenv from "dotenv";
+import { resolve } from "path";
 
-dotenv.config({ path: resolve(process.cwd(), '.env') });
+dotenv.config({ path: resolve(process.cwd(), ".env") });
 
 const connectionString = process.env.DATABASE_URL;
 if (!connectionString) {
-  console.error('DATABASE_URL is missing');
+  console.error("DATABASE_URL is missing");
   process.exit(1);
 }
 
@@ -77,19 +77,19 @@ const statements = [
   `DO $$ BEGIN
     ALTER TABLE "lead_activities" ADD CONSTRAINT "lead_activities_lead_id_leads_id_fk" FOREIGN KEY ("lead_id") REFERENCES "leads"("id") ON DELETE no action ON UPDATE no action;
     EXCEPTION WHEN duplicate_object THEN null;
-    END $$;`
+    END $$;`,
 ];
 
 async function apply() {
   for (const statement of statements) {
     try {
-      console.log('Executing:', statement.substring(0, 50) + '...');
+      console.log("Executing:", statement.substring(0, 50) + "...");
       await sql(statement);
     } catch (e) {
-      console.error('Failed statement:', statement);
+      console.error("Failed statement:", statement);
       console.error(e);
     }
   }
 }
 
-apply().then(() => console.log('Done'));
+apply().then(() => console.log("Done"));

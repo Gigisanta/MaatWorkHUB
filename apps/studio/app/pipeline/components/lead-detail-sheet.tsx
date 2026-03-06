@@ -1,20 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { 
-  Sheet, 
-  SheetContent, 
-  SheetHeader, 
-  SheetTitle, 
-  SheetDescription 
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
 } from "@maatwork/ui";
 import { Lead, Activity } from "./kanban-board";
-import { 
-  Phone, 
-  Mail, 
-  Building, 
-  DollarSign, 
-  Clock, 
+import {
+  Phone,
+  Mail,
+  Building,
+  DollarSign,
+  Clock,
   Plus,
   MessageSquare,
   PhoneCall,
@@ -22,7 +22,7 @@ import {
   Users,
   Settings,
   X,
-  Rocket
+  Rocket,
 } from "lucide-react";
 import { Badge } from "@maatwork/ui";
 import { Button } from "@maatwork/ui";
@@ -38,7 +38,12 @@ interface LeadDetailSheetProps {
   onRefresh?: () => void;
 }
 
-export function LeadDetailSheet({ lead, isOpen, onClose, onRefresh }: LeadDetailSheetProps) {
+export function LeadDetailSheet({
+  lead,
+  isOpen,
+  onClose,
+  onRefresh,
+}: LeadDetailSheetProps) {
   const [isLogging, setIsLogging] = useState(false);
 
   if (!lead) return null;
@@ -53,10 +58,16 @@ export function LeadDetailSheet({ lead, isOpen, onClose, onRefresh }: LeadDetail
       <SheetContent className="sm:max-w-xl bg-black/80 backdrop-blur-2xl border-white/10 text-white overflow-y-auto custom-scrollbar">
         <SheetHeader className="text-left space-y-4">
           <div className="flex justify-between items-start">
-            <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20 uppercase tracking-widest text-[10px]">
+            <Badge
+              variant="outline"
+              className="bg-primary/10 text-primary border-primary/20 uppercase tracking-widest text-[10px]"
+            >
               {lead.status}
             </Badge>
-            <button onClick={onClose} className="text-white/40 hover:text-white transition-colors">
+            <button
+              onClick={onClose}
+              className="text-white/40 hover:text-white transition-colors"
+            >
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -80,13 +91,17 @@ export function LeadDetailSheet({ lead, isOpen, onClose, onRefresh }: LeadDetail
               <div className="text-[10px] text-white/30 uppercase tracking-widest flex items-center gap-1.5">
                 <Mail className="w-3 h-3" /> Email
               </div>
-              <div className="text-sm font-medium text-white/80">{lead.email || "N/A"}</div>
+              <div className="text-sm font-medium text-white/80">
+                {lead.email || "N/A"}
+              </div>
             </div>
             <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
               <div className="text-[10px] text-white/30 uppercase tracking-widest flex items-center gap-1.5">
                 <Phone className="w-3 h-3" /> Teléfono
               </div>
-              <div className="text-sm font-medium text-white/80">{(lead as any).phone || "N/A"}</div>
+              <div className="text-sm font-medium text-white/80">
+                {(lead as any).phone || "N/A"}
+              </div>
             </div>
             <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
               <div className="text-[10px] text-white/30 uppercase tracking-widest flex items-center gap-1.5">
@@ -101,21 +116,28 @@ export function LeadDetailSheet({ lead, isOpen, onClose, onRefresh }: LeadDetail
                 <Clock className="w-3 h-3" /> Creado
               </div>
               <div className="text-sm font-medium text-white/80">
-                {lead.createdAt ? new Date(lead.createdAt).toLocaleDateString() : "N/A"}
+                {lead.createdAt
+                  ? new Date(lead.createdAt).toLocaleDateString()
+                  : "N/A"}
               </div>
             </div>
           </div>
 
-          {lead.status === 'won' && (
+          {lead.status === "won" && (
             <div className="p-6 rounded-2xl bg-primary/10 border border-primary/20 flex flex-col items-center text-center gap-4">
               <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
                 <Rocket className="w-6 h-6 text-primary" />
               </div>
               <div>
                 <h4 className="font-bold text-lg">¡Oportunidad Ganada!</h4>
-                <p className="text-sm text-white/60">Este lead está listo para ser convertido en una aplicación activa.</p>
+                <p className="text-sm text-white/60">
+                  Este lead está listo para ser convertido en una aplicación
+                  activa.
+                </p>
               </div>
-              <Link href={`/apps/new?name=${encodeURIComponent(lead.name)}&slug=${encodeURIComponent(lead.company?.toLowerCase().replace(/[^a-z0-9]/g, '-') || '')}`}>
+              <Link
+                href={`/apps/new?name=${encodeURIComponent(lead.name)}&slug=${encodeURIComponent(lead.company?.toLowerCase().replace(/[^a-z0-9]/g, "-") || "")}`}
+              >
                 <Button className="bg-primary hover:bg-primary/90 text-white font-bold px-8">
                   Provisionar Aplicación
                 </Button>
@@ -126,10 +148,12 @@ export function LeadDetailSheet({ lead, isOpen, onClose, onRefresh }: LeadDetail
           {/* Activity Section */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold uppercase tracking-widest text-white/60">Actividad</h3>
-              <Button 
-                variant="outline" 
-                size="sm" 
+              <h3 className="text-sm font-semibold uppercase tracking-widest text-white/60">
+                Actividad
+              </h3>
+              <Button
+                variant="outline"
+                size="sm"
                 className="h-8 border-white/10 bg-white/5 hover:bg-white/10"
                 onClick={() => setIsLogging(!isLogging)}
               >
@@ -139,8 +163,8 @@ export function LeadDetailSheet({ lead, isOpen, onClose, onRefresh }: LeadDetail
             </div>
 
             {isLogging && (
-              <ActivityLogger 
-                leadId={lead.id} 
+              <ActivityLogger
+                leadId={lead.id}
                 onSuccess={handleActivityLogged}
                 onCancel={() => setIsLogging(false)}
               />
@@ -148,7 +172,7 @@ export function LeadDetailSheet({ lead, isOpen, onClose, onRefresh }: LeadDetail
 
             <div className="space-y-4 relative">
               <div className="absolute left-[17px] top-4 bottom-4 w-[1px] bg-white/10" />
-              
+
               {lead.activities && lead.activities.length > 0 ? (
                 lead.activities.map((activity, idx) => (
                   <div key={activity.id} className="flex gap-4 relative">
@@ -185,22 +209,34 @@ export function LeadDetailSheet({ lead, isOpen, onClose, onRefresh }: LeadDetail
 
 function getActivityIcon(type: string) {
   switch (type) {
-    case 'call': return <PhoneCall className="w-4 h-4 text-blue-400" />;
-    case 'email': return <MailIcon className="w-4 h-4 text-yellow-400" />;
-    case 'meeting': return <Users className="w-4 h-4 text-purple-400" />;
-    case 'note': return <MessageSquare className="w-4 h-4 text-primary" />;
-    case 'system': return <Settings className="w-4 h-4 text-white/40" />;
-    default: return <MessageSquare className="w-4 h-4" />;
+    case "call":
+      return <PhoneCall className="w-4 h-4 text-blue-400" />;
+    case "email":
+      return <MailIcon className="w-4 h-4 text-yellow-400" />;
+    case "meeting":
+      return <Users className="w-4 h-4 text-purple-400" />;
+    case "note":
+      return <MessageSquare className="w-4 h-4 text-primary" />;
+    case "system":
+      return <Settings className="w-4 h-4 text-white/40" />;
+    default:
+      return <MessageSquare className="w-4 h-4" />;
   }
 }
 
 function getActivityLabel(type: string) {
   switch (type) {
-    case 'call': return 'Llamada';
-    case 'email': return 'Email';
-    case 'meeting': return 'Reunión';
-    case 'note': return 'Nota';
-    case 'system': return 'Sistema';
-    default: return 'Actividad';
+    case "call":
+      return "Llamada";
+    case "email":
+      return "Email";
+    case "meeting":
+      return "Reunión";
+    case "note":
+      return "Nota";
+    case "system":
+      return "Sistema";
+    default:
+      return "Actividad";
   }
 }

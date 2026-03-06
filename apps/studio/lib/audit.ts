@@ -18,7 +18,7 @@ export async function logAuditEvent({
   action,
   entityType,
   entityId,
-  metadata
+  metadata,
 }: AuditLogOptions) {
   try {
     const headersList = await headers();

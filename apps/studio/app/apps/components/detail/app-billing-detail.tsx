@@ -12,15 +12,19 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  Badge
+  Badge,
 } from "@maatwork/ui";
 import { CreditCard, Receipt } from "lucide-react";
 
 export async function AppBillingDetail({ appId }: { appId: string }) {
-  const invoices = await db.select().from(app_invoices).where(eq(app_invoices.appId, appId)).orderBy(desc(app_invoices.createdAt));
+  const invoices = await db
+    .select()
+    .from(app_invoices)
+    .where(eq(app_invoices.appId, appId))
+    .orderBy(desc(app_invoices.createdAt));
   const subscription = await db.query.app_subscriptions.findFirst({
     where: eq(app_subscriptions.appId, appId),
-    orderBy: [desc(app_subscriptions.createdAt)]
+    orderBy: [desc(app_subscriptions.createdAt)],
   });
 
   return (
@@ -35,11 +39,22 @@ export async function AppBillingDetail({ appId }: { appId: string }) {
           <CardContent>
             <div className="flex justify-between items-end">
               <div>
-                <p className="text-2xl font-bold">{subscription?.planId || 'Standard Plan'}</p>
-                <p className="text-xs text-muted-foreground mt-1">Próximo cobro: {subscription?.currentPeriodEnd?.toLocaleDateString() || 'N/A'}</p>
+                <p className="text-2xl font-bold">
+                  {subscription?.planId || "Standard Plan"}
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Próximo cobro:{" "}
+                  {subscription?.currentPeriodEnd?.toLocaleDateString() ||
+                    "N/A"}
+                </p>
               </div>
-              <Badge variant={subscription?.status === 'active' ? 'default' : 'destructive'} className="capitalize">
-                {subscription?.status || 'inactive'}
+              <Badge
+                variant={
+                  subscription?.status === "active" ? "default" : "destructive"
+                }
+                className="capitalize"
+              >
+                {subscription?.status || "inactive"}
               </Badge>
             </div>
           </CardContent>
@@ -56,28 +71,44 @@ export async function AppBillingDetail({ appId }: { appId: string }) {
         <Table>
           <TableHeader>
             <TableRow className="border-white/5">
-              <TableHead className="text-[10px] uppercase font-black text-white/40">Monto</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-white/40">Estado</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-white/40">Fecha</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-white/40">
+                Monto
+              </TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-white/40">
+                Estado
+              </TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-white/40">
+                Fecha
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {invoices.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={3} className="text-center py-8 text-muted-foreground italic text-sm">
+                <TableCell
+                  colSpan={3}
+                  className="text-center py-8 text-muted-foreground italic text-sm"
+                >
                   No se registran facturas para este centro.
                 </TableCell>
               </TableRow>
             ) : (
               invoices.map((inv) => (
                 <TableRow key={inv.id} className="border-white/5">
-                  <TableCell className="font-bold">${Number(inv.amount).toLocaleString()} {inv.currency}</TableCell>
+                  <TableCell className="font-bold">
+                    ${Number(inv.amount).toLocaleString()} {inv.currency}
+                  </TableCell>
                   <TableCell>
-                    <Badge variant={inv.status === 'paid' ? 'default' : 'outline'} className="text-[10px] uppercase">
+                    <Badge
+                      variant={inv.status === "paid" ? "default" : "outline"}
+                      className="text-[10px] uppercase"
+                    >
                       {inv.status}
                     </Badge>
                   </TableCell>
-                  <TableCell className="text-xs text-white/40">{inv.createdAt?.toLocaleDateString()}</TableCell>
+                  <TableCell className="text-xs text-white/40">
+                    {inv.createdAt?.toLocaleDateString()}
+                  </TableCell>
                 </TableRow>
               ))
             )}

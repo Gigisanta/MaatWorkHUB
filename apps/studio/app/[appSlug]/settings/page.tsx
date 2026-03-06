@@ -1,11 +1,22 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, Button, Input, Label } from "@maatwork/ui";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Button,
+  Input,
+  Label,
+} from "@maatwork/ui";
 import { MessageSquare, Receipt } from "lucide-react";
 
 export default function SettingsPage() {
   return (
     <div className="p-8 max-w-4xl mx-auto space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Integrations & Settings</h1>
-      
+      <h1 className="text-3xl font-bold tracking-tight">
+        Integrations & Settings
+      </h1>
+
       <div className="grid gap-6">
         <Card>
           <CardHeader>
@@ -14,7 +25,8 @@ export default function SettingsPage() {
               <CardTitle>WhatsApp Cloud API</CardTitle>
             </div>
             <CardDescription>
-              Connect your WhatsApp Business account to send automated reminders and notifications.
+              Connect your WhatsApp Business account to send automated reminders
+              and notifications.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -37,7 +49,8 @@ export default function SettingsPage() {
               <CardTitle>AFIP Facturación</CardTitle>
             </div>
             <CardDescription>
-              Configure electronic billing with AFIP to generate formal invoices. (Requires certificate)
+              Configure electronic billing with AFIP to generate formal
+              invoices. (Requires certificate)
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">

@@ -9,12 +9,16 @@ import { lead_activities } from "@maatwork/database/schema";
 import { desc } from "drizzle-orm";
 import { v4 as uuid } from "uuid";
 
-export async function updateLeadStatus(id: string, status: "new" | "contacted" | "proposal" | "won" | "lost") {
+export async function updateLeadStatus(
+  id: string,
+  status: "new" | "contacted" | "proposal" | "won" | "lost",
+) {
   try {
-    await db.update(leads)
+    await db
+      .update(leads)
       .set({ status, updatedAt: new Date() })
       .where(eq(leads.id, id));
-    
+
     // Log system activity
     await addLeadActivity(id, {
       type: "system",
@@ -34,9 +38,9 @@ export async function getLeads() {
     with: {
       activities: {
         limit: 1,
-        orderBy: [desc(lead_activities.createdAt)]
-      }
-    }
+        orderBy: [desc(lead_activities.createdAt)],
+      },
+    },
   });
 }
 
@@ -45,18 +49,22 @@ export async function getLeadById(id: string) {
     where: eq(leads.id, id),
     with: {
       activities: {
-        orderBy: [desc(lead_activities.createdAt)]
-      }
-    }
+        orderBy: [desc(lead_activities.createdAt)],
+      },
+    },
   });
 }
 
-export async function updateLead(id: string, data: Partial<typeof leads.$inferInsert>) {
+export async function updateLead(
+  id: string,
+  data: Partial<typeof leads.$inferInsert>,
+) {
   try {
-    await db.update(leads)
+    await db
+      .update(leads)
       .set({ ...data, updatedAt: new Date() })
       .where(eq(leads.id, id));
-    
+
     revalidatePath("/pipeline");
     return { success: true };
   } catch (error) {
@@ -65,7 +73,14 @@ export async function updateLead(id: string, data: Partial<typeof leads.$inferIn
   }
 }
 
-export async function addLeadActivity(leadId: string, data: { type: 'call' | 'email' | 'meeting' | 'note' | 'task' | 'system'; content: string; metadata?: any }) {
+export async function addLeadActivity(
+  leadId: string,
+  data: {
+    type: "call" | "email" | "meeting" | "note" | "task" | "system";
+    content: string;
+    metadata?: any;
+  },
+) {
   try {
     const id = uuid();
     await db.insert(lead_activities).values({
@@ -73,7 +88,7 @@ export async function addLeadActivity(leadId: string, data: { type: 'call' | 'em
       leadId,
       ...data,
     });
-    
+
     revalidatePath("/pipeline");
     return { success: true };
   } catch (error) {

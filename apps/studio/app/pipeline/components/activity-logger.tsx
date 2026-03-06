@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { Button } from "@maatwork/ui";
 import { Textarea } from "@maatwork/ui";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@maatwork/ui";
 import { addLeadActivity } from "../lead-actions";
 import { toast } from "sonner";
@@ -20,9 +20,15 @@ interface ActivityLoggerProps {
   onCancel: () => void;
 }
 
-export function ActivityLogger({ leadId, onSuccess, onCancel }: ActivityLoggerProps) {
+export function ActivityLogger({
+  leadId,
+  onSuccess,
+  onCancel,
+}: ActivityLoggerProps) {
   const [loading, setLoading] = useState(false);
-  const [type, setType] = useState<any>("note");
+  const [type, setType] = useState<"note" | "call" | "email" | "meeting">(
+    "note",
+  );
   const [content, setContent] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -45,9 +51,17 @@ export function ActivityLogger({ leadId, onSuccess, onCancel }: ActivityLoggerPr
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 rounded-2xl bg-white/[0.05] border border-white/10 space-y-4 animate-in fade-in slide-in-from-top-2">
+    <form
+      onSubmit={handleSubmit}
+      className="p-4 rounded-2xl bg-white/[0.05] border border-white/10 space-y-4 animate-in fade-in slide-in-from-top-2"
+    >
       <div className="flex gap-4">
-        <Select value={type} onValueChange={setType}>
+        <Select
+          value={type}
+          onValueChange={(val) =>
+            setType(val as "note" | "call" | "email" | "meeting")
+          }
+        >
           <SelectTrigger className="w-[180px] bg-black/40 border-white/10 h-10">
             <SelectValue placeholder="Tipo de actividad" />
           </SelectTrigger>
@@ -80,7 +94,7 @@ export function ActivityLogger({ leadId, onSuccess, onCancel }: ActivityLoggerPr
         </Select>
       </div>
 
-      <Textarea 
+      <Textarea
         placeholder="Escribe los detalles de la interacción..."
         className="bg-black/40 border-white/10 min-h-[100px] resize-none focus-visible:ring-primary/20"
         value={content}
@@ -89,19 +103,19 @@ export function ActivityLogger({ leadId, onSuccess, onCancel }: ActivityLoggerPr
       />
 
       <div className="flex justify-end gap-2">
-        <Button 
-          type="button" 
-          variant="ghost" 
-          size="sm" 
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
           onClick={onCancel}
           disabled={loading}
           className="text-white/40 hover:text-white"
         >
           Cancelar
         </Button>
-        <Button 
-          type="submit" 
-          size="sm" 
+        <Button
+          type="submit"
+          size="sm"
           disabled={loading || !content.trim()}
           className="bg-primary hover:bg-primary/80 text-white font-bold"
         >
