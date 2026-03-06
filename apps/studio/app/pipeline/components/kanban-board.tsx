@@ -20,6 +20,7 @@ export interface Lead {
   name: string;
   email: string | null;
   company: string | null;
+  phone: string | null;
   status: "new" | "contacted" | "proposal" | "won" | "lost";
   value: string | null;
   notes: string | null;
@@ -50,7 +51,7 @@ export function KanbanBoard({ initialLeads }: { initialLeads: Lead[] }) {
     e.preventDefault();
   };
 
-  const handleDrop = async (e: React.DragEvent, stageId: string) => {
+  const handleDrop = async (e: React.DragEvent, stageId: Lead["status"]) => {
     e.preventDefault();
     const id = e.dataTransfer.getData("text/plain");
     
@@ -60,9 +61,9 @@ export function KanbanBoard({ initialLeads }: { initialLeads: Lead[] }) {
 
       // Optimistic update
       const prevLeads = [...leads];
-      setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status: stageId as any } : l)));
+      setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status: stageId } : l)));
       
-      const result = await updateLeadStatus(id, stageId as any);
+      const result = await updateLeadStatus(id, stageId);
       
       if (!result.success) {
         setLeads(prevLeads);
@@ -88,8 +89,8 @@ export function KanbanBoard({ initialLeads }: { initialLeads: Lead[] }) {
   const refreshSelectedLead = async (id: string) => {
     const fullLead = await getLeadById(id);
     if (fullLead) {
-      setSelectedLead(fullLead as any);
-      setLeads(prev => prev.map(l => l.id === id ? (fullLead as any) : l));
+      setSelectedLead(fullLead as Lead);
+      setLeads(prev => prev.map(l => l.id === id ? (fullLead as Lead) : l));
     }
   };
 
@@ -125,7 +126,7 @@ export function KanbanBoard({ initialLeads }: { initialLeads: Lead[] }) {
             key={stage.id}
             className="flex-1 min-w-[320px] bg-white/[0.02] border border-white/5 rounded-3xl p-4 flex flex-col gap-4 transition-colors duration-500 hover:bg-white/[0.03]"
             onDragOver={handleDragOver}
-            onDrop={(e) => handleDrop(e, stage.id)}
+            onDrop={(e) => handleDrop(e, stage.id as Lead["status"])}
           >
             <div className="flex items-center justify-between mb-2 px-2">
               <h3 className="font-bold text-[10px] uppercase tracking-[0.2em] text-white/50">{stage.title}</h3>

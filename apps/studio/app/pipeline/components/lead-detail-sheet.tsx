@@ -86,7 +86,7 @@ export function LeadDetailSheet({ lead, isOpen, onClose, onRefresh }: LeadDetail
               <div className="text-[10px] text-white/30 uppercase tracking-widest flex items-center gap-1.5">
                 <Phone className="w-3 h-3" /> Teléfono
               </div>
-              <div className="text-sm font-medium text-white/80">{(lead as any).phone || "N/A"}</div>
+              <div className="text-sm font-medium text-white/80">{lead.phone || "N/A"}</div>
             </div>
             <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
               <div className="text-[10px] text-white/30 uppercase tracking-widest flex items-center gap-1.5">

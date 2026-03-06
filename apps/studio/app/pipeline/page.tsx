@@ -1,5 +1,5 @@
 import { getLeads } from "./lead-actions";
-import { KanbanBoard } from "./components/kanban-board";
+import { KanbanBoard, Lead } from "./components/kanban-board";
 import { Suspense } from "react";
 import { Skeleton } from "@maatwork/ui";
 import { LeadExportButton } from "./components/lead-export-button";
@@ -20,7 +20,7 @@ export default async function PipelinePage() {
       </div>
       
       <Suspense fallback={<PipelineSkeleton />}>
-        <KanbanBoard initialLeads={initialLeads as any} />
+        <KanbanBoard initialLeads={initialLeads as Lead[]} />
       </Suspense>
     </div>
   );

@@ -168,7 +168,7 @@ export default async function AppsPage() {
                     <div className="flex justify-end gap-2">
                        <AppStatusToggle 
                         appId={t.id} 
-                        currentStatus={t.status as any} 
+                        currentStatus={t.status as "active" | "past_due" | "canceled" | "trialing" | "inactive"}
                       />
                       <Button variant="ghost" size="sm" asChild className="hover:bg-white/5">
                         <Link href={`/apps/${t.id}`}>Gestionar</Link>
