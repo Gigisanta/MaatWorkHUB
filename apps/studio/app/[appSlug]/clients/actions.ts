@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { appActionClient } from "@maatwork/auth/safe-action";
+import { appActionClient, ActionError } from "@maatwork/auth/safe-action";
 import { db } from "@maatwork/database";
 import { clients } from "@maatwork/database/schema";
 import { revalidatePath } from "next/cache";
@@ -19,7 +19,7 @@ export const createClientAction = appActionClient
     // 1. Security Check: Ensure user belongs to this app
     // (Note: middleware and Action Client already handle basic session, but we double-verify context)
     if (session.user.appId !== appId && session.user.role !== "founder") {
-        throw new Error("Security Violation: Unauthorized app context mutation attempted.");
+        throw new ActionError("Security Violation: Unauthorized app context mutation attempted.");
     }
 
     try {
@@ -36,6 +36,6 @@ export const createClientAction = appActionClient
       return { success: true, client: newClient };
     } catch (error) {
       console.error("Failed to create client:", error);
-      throw new Error("Database error occurred while creating client.");
+      throw new ActionError("Database error occurred while creating client.");
     }
   });
